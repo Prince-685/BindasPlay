@@ -205,7 +205,7 @@ main .form{
     background: rgb(184, 178, 178);
     padding: 2rem 3rem;
     border-radius:0.5rem;
-    text-align: center;
+    text-align: left;
     margin: 0rem 2rem;
     margin-top: 2rem;
 }
@@ -218,6 +218,7 @@ main .form{
     padding: 1rem;
     border-radius: .8rem;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .content{
@@ -310,9 +311,9 @@ main .form{
     .disclaimer{
         padding: 2rem 3rem;
         border-radius:0.5rem;
-        text-align: center;
         margin: 0rem 0.6rem;
         margin-top: 2rem;
+        font-size: 1.5rem;
     }
     
 }
