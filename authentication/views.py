@@ -19,9 +19,9 @@ def login(request):
             return render(request, "dasboard.html")
         else:
             #messages.error(request, "Wrong email id or Password")
-            return render(request, "userinterface.html",{'msg':'Wrong Username/Password'})
+            return render(request, "Userinterface.html",{'msg':'Wrong Username/Password'})
     
     
   except Exception as e:
     print('errr--',e)
-    return render(request, "userinterface.html")
+    return render(request, "Userinterface.html")
