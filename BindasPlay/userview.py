@@ -33,18 +33,19 @@ def Userview(request):
             else:
                 curr+=d[i]
         data = db.child('Notifications').child(curr).get().val()
-        row = data['notification']
-        return render(request,"Userinterface.html", {'msg': " ","row":row})
+        if(data):
+            row = data['notification']
+        return render(request,"Userinterface.html", {"row":row})
     except Exception as e:
         print("error:",e)
-        return render(request,"Userinterface.html", {'msg': " "})
+        return render(request,"Userinterface.html")
 
 
 def displayresult(request):
     try:
         today = datetime.date.today()
         d= today.strftime("%y/%m/%d")
-    
+        
         curr=""
         for i in range(0,len(d)):
             if d[i]=='/':
@@ -150,8 +151,30 @@ def saveResult(request):
 
 def SearchByDate(request):
     try:
+        today = datetime.date.today()
+        d = today.strftime("%y/%m/%d")
+        t_date=""
+        for i in range(0,len(d)):
+            if d[i]=='/':
+                t_date+="-"
+            else:
+                t_date+=d[i]
+
         date = request.GET['date'] 
-        curr=date[2:]  
+        curr=date[2:] 
+
+        curr_str = str(curr)
+
+        c_list = curr_str.split("-")
+        t_list = t_date.split("-")
+
+        t_y = int(t_list[0])
+        t_m = int(t_list[1])
+        t_d = int(t_list[2])
+
+        c_y = int(c_list[0])
+        c_m = int(c_list[1])
+        c_d = int(c_list[2])
         
         data = db.child('data').child(curr).get()
         data_list=[]
@@ -172,54 +195,86 @@ def SearchByDate(request):
         
 
         res=[]
-        for row in rows:
-           
-            l = row[3].split(":")
+
+        if (c_m<=t_m and c_y<=t_y):
+
+            if(c_d <t_d):
+                for row in rows:
             
-            h_s = l[0]
-            m_s = l[1]
-            
-            h = int(h_s)
-            m = int(m_s)
-            
-            if(h == hour and m<=min):
-                if(h==12):
-                    Ho = str(h)
-                    Mi = str(m)
-                    t=Ho+":"+Mi+"pm"
-                    row[3] = t
-                elif(h>12):
-                    h=h-12
-                    print(h)
-                    Ho = str(h)
-                    Mi = str(m)
-                    t=Ho+":"+Mi+"pm"
-                    row[3] = t
-                else:
-                    Ho = str(h)
-                    Mi = str(m)
-                    t=Ho+":"+Mi+"am"
-                    row[3] = t
-                res.append(row)
-            elif(h<hour):
-                if(h==12):
-                    Ho = str(h)
-                    Mi = str(m)
-                    t=Ho+":"+Mi+"pm"
-                    row[3] = t
-                elif(h>12):
-                    h=h-12
-                    print(h)
-                    Ho = str(h)
-                    Mi = str(m)
-                    t=Ho+":"+Mi+"pm"
-                    row[3] = t
-                else:
-                    Ho = str(h)
-                    Mi = str(m)
-                    t=Ho+":"+Mi+"am"
-                    row[3] = t
-                res.append(row)
+                    l = row[3].split(":")
+                    
+                    h_s = l[0]
+                    m_s = l[1]
+                    
+                    h = int(h_s)
+                    m = int(m_s)
+                    
+                    
+                    if(h==12):
+                        Ho = str(h)
+                        Mi = str(m)
+                        t=Ho+":"+Mi+"pm"
+                        row[3] = t
+                    elif(h>12):
+                        h=h-12
+                        Ho = str(h)
+                        Mi = str(m)
+                        t=Ho+":"+Mi+"pm"
+                        row[3] = t
+                    else:
+                        Ho = str(h)
+                        Mi = str(m)
+                        t=Ho+":"+Mi+"am"
+                        row[3] = t
+                    res.append(row)
+
+            elif (c_d==t_d):
+                for row in rows:
+                
+                    l = row[3].split(":")
+                    
+                    h_s = l[0]
+                    m_s = l[1]
+                    
+                    h = int(h_s)
+                    m = int(m_s)
+                    
+                    if(h == hour and m<=min):
+                        if(h==12):
+                            Ho = str(h)
+                            Mi = str(m)
+                            t=Ho+":"+Mi+"pm"
+                            row[3] = t
+                        elif(h>12):
+                            h=h-12
+                            Ho = str(h)
+                            Mi = str(m)
+                            t=Ho+":"+Mi+"pm"
+                            row[3] = t
+                        else:
+                            Ho = str(h)
+                            Mi = str(m)
+                            t=Ho+":"+Mi+"am"
+                            row[3] = t
+                        res.append(row)
+                    elif(h<hour):
+                        if(h==12):
+                            Ho = str(h)
+                            Mi = str(m)
+                            t=Ho+":"+Mi+"pm"
+                            row[3] = t
+                        elif(h>12):
+                            h=h-12
+                            Ho = str(h)
+                            Mi = str(m)
+                            t=Ho+":"+Mi+"pm"
+                            row[3] = t
+                        else:
+                            Ho = str(h)
+                            Mi = str(m)
+                            t=Ho+":"+Mi+"am"
+                            row[3] = t
+                        res.append(row)
 
         return render(request,"resultbydate.html",{'rows':res}) 
     except Exception as e:
@@ -261,7 +316,6 @@ def SearchAll(request):
                 row[3] = t
             elif(h>12):
                 h=h-12
-                print(h)
                 Ho = str(h)
                 Mi = str(m)
                 t=Ho+":"+Mi+"pm"
