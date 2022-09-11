@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',userview.Userview),
 
-    path('displayresult/',userview.displayresult),
+    path('displayresult/',userview.displayResult),
     path('saveresult/',userview.saveResult),
     path('searchAll/',userview.SearchAll),
     path('search/',userview.SearchByDate),

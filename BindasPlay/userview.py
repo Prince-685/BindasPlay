@@ -41,7 +41,7 @@ def Userview(request):
         return render(request,"Userinterface.html")
 
 
-def displayresult(request):
+def displayResult(request):
     try:
         today = datetime.date.today()
         d= today.strftime("%y/%m/%d")
@@ -81,7 +81,7 @@ def displayresult(request):
             h = int(h_s)
             m = int(m_s)
             
-            if(h == hour and m<=min):
+            if(h < hour):
                 if(h==12):
                     Ho = str(h)
                     Mi = str(m)
@@ -99,7 +99,7 @@ def displayresult(request):
                     t=Ho+":"+Mi+"am"
                     row[3] = t
                 res.append(row)
-            elif(h<hour):
+            elif(h==hour and m<=min):
                 if(h==12):
                     Ho = str(h)
                     Mi = str(m)
@@ -120,7 +120,7 @@ def displayresult(request):
         return render(request,"displayresult.html",{'rows':res}) 
     except Exception as e:
         print('err:  ',e)
-        return render(request,'displayresult.html')
+        return render(request,"displayresult.html")
 
 
 
