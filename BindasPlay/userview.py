@@ -52,7 +52,10 @@ def displayResult(request):
                 curr+="-"
             else:
                 curr+=d[i]
+
+        
         data = db.child('data').child(curr).get()
+        
         data_list=[]
         rows=[]
         for x in data.each():
@@ -62,7 +65,7 @@ def displayResult(request):
                 d = row.values()
                 y=list(d)
             rows.append(y)
-      
+        
         now = datetime.datetime.now()
         time = now.time()
         hour = time.hour
@@ -72,8 +75,8 @@ def displayResult(request):
 
         res=[]
         for row in rows:
-           
-            l = row[3].split(":")
+            x = row[3]
+            l = x.split(":")
             
             h_s = l[0]
             m_s = l[1]
@@ -133,12 +136,12 @@ def saveResult(request):
         today = datetime.date.today()
         d = today.strftime("%y/%m/%d")
         curr=""
+        
         for i in range(0,len(d)):
             if d[i]=='/':
                 curr+="-"
             else:
                 curr+=d[i]
-
 
         row = {"time":time,"num1":number1,"num2":number2,"num3":number3}
         db.child('data').child(curr).child(time).set(row)
@@ -200,8 +203,8 @@ def SearchByDate(request):
 
             if(c_d <t_d):
                 for row in rows:
-            
-                    l = row[3].split(":")
+                    x = row[3]
+                    l = x.split(":")
                     
                     h_s = l[0]
                     m_s = l[1]
@@ -230,8 +233,8 @@ def SearchByDate(request):
 
             elif (c_d==t_d):
                 for row in rows:
-                
-                    l = row[3].split(":")
+                    x = row[3]
+                    l = x.split(":")
                     
                     h_s = l[0]
                     m_s = l[1]
