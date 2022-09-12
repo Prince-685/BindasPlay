@@ -109,9 +109,16 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin-top: 2rem;
+    color: #182323;
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 1rem;
 }
 .result a{
+    margin-top: 1rem;
     background: orange;
     color: blue;
     border-radius: 0.8rem;
@@ -220,11 +227,10 @@ main .form{
     margin-bottom: 2rem;
 }
 
-.disclaimer .content{
+.content{
     font-size: 2rem;
     color: #222;
 }
-
 
 
 
@@ -268,6 +274,8 @@ main .form{
 
     .result{
         margin-top: 1.5rem;
+
+        font-size: 2rem;
     }
     
     .result a{
@@ -311,13 +319,9 @@ main .form{
     .disclaimer{
         padding: 2rem 3rem;
         border-radius:0.5rem;
+        text-align: center;
         margin: 0rem 0.6rem;
         margin-top: 2rem;
-        
-    }
-    .disclaimer .content{
-        font-size: 1.2rem;
-        color: #222;
     }
     
 }

@@ -154,39 +154,47 @@ tbody tr td:last-child{
     }
 
     .header{
-        margin-top: 2rem;
+        margin-top: 1rem;
         font-size: 2.5rem;
     }
+
+    .subheader-title {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+    }
+
     .InputDate input{
         width: 10rem;
         font-size: 1.2rem;
         padding-left: 0rem;
     }
     .Btn button{
-        width: 7rem;
-        height: 4rem;
+        width: 12rem;
+        height: 2.5rem;
         font-size: 1rem;
         margin-left: .5rem;
-    
     }
-    
 
     main{
-        padding: 4rem 0rem;
-        
+        padding: 0.5rem 0rem 4rem 0rem;
     }
 
     thead tr{
-        height: 3rem;
-        font-size: 1.5rem;
+        height: 1.5rem;
+        font-size: 1.2rem;
         font-weight: bold;
+    }
+
+    .subheader{
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
     }
     
     tbody tr{
-        height: 6rem;
+        height: 1.5rem;
     }
     tbody tr td{
-        font-size: 2rem;
+        font-size: 1.2rem;
     }
      
 }

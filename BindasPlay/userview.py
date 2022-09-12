@@ -1,9 +1,9 @@
-
-from xml.etree.ElementTree import tostring
+from calendar import weekday
 from django.shortcuts import render
 import datetime
-
+from random import randrange
 import pyrebase
+
 
 
 Config={
@@ -11,8 +11,8 @@ Config={
     "authDomain": "bindasplay-91539.firebaseapp.com",
     "databaseURL": "https://bindasplay-43d58-default-rtdb.firebaseio.com",
     'projectId': "bindasplay-43d58",
-    'storageBucket': "bindasplay-91539.appspot.com",
-    "messagingSenderId": "848155187545",
+    'storageBucket': "bindasplay-43d58.appspot.com",
+    "messagingSenderId": "566594345888",
     "appId": "1:848155187545:web:7c9beefecba1479c5a1448",
     "measurementId": "G-QYR2NPPB22"
 }
@@ -23,18 +23,13 @@ db = firebase.database()
 
 def Userview(request):
     try:
-        today = datetime.date.today()
-        d= today.strftime("%y/%m/%d")
-    
-        curr=""
-        for i in range(0,len(d)):
-            if d[i]=='/':
-                curr+="-"
-            else:
-                curr+=d[i]
-        data = db.child('Notifications').child(curr).get().val()
-        if(data):
-            row = data['notification']
+        data = db.child('Notifications').get()
+        rows=[]
+        for x in data.each():
+            rows.append(x.val())
+        
+        row = rows[0]
+
         return render(request,"Userinterface.html", {"row":row})
     except Exception as e:
         print("error:",e)
@@ -88,17 +83,29 @@ def displayResult(request):
                 if(h==12):
                     Ho = str(h)
                     Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
                     t=Ho+":"+Mi+"pm"
                     row[3] = t
                 elif(h>12):
                     h=h-12
                     Ho = str(h)
                     Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
                     t=Ho+":"+Mi+"pm"
                     row[3] = t
                 else:
                     Ho = str(h)
                     Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
                     t=Ho+":"+Mi+"am"
                     row[3] = t
                 res.append(row)
@@ -106,17 +113,29 @@ def displayResult(request):
                 if(h==12):
                     Ho = str(h)
                     Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
                     t=Ho+":"+Mi+"pm"
                     row[3] = t
                 elif(h>12):
                     h=h-12
                     Ho = str(h)
                     Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
                     t=Ho+":"+Mi+"pm"
                     row[3] = t
                 else:
                     Ho = str(h)
                     Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
                     t=Ho+":"+Mi+"am"
                     row[3] = t
                 res.append(row)
@@ -126,7 +145,6 @@ def displayResult(request):
         return render(request,"displayresult.html")
 
 
-
 def saveResult(request):
     try:
         time=request.GET['time']
@@ -134,7 +152,10 @@ def saveResult(request):
         number2=request.GET['number2']
         number3=request.GET['number3']
         today = datetime.date.today()
+        
         d = today.strftime("%y/%m/%d")
+        weekday = today.weekday()
+        print(weekday)
         curr=""
         
         for i in range(0,len(d)):
@@ -142,9 +163,9 @@ def saveResult(request):
                 curr+="-"
             else:
                 curr+=d[i]
-
-        row = {"time":time,"num1":number1,"num2":number2,"num3":number3}
-        db.child('data').child(curr).child(time).set(row)
+        if(weekday!=6):
+            row = {"time":time,"num1":number1,"num2":number2,"num3":number3}
+            db.child('data').child(curr).child(time).set(row)
         
         return render(request,"dasboard.html",{'status':True})
     except Exception as e:
@@ -216,17 +237,29 @@ def SearchByDate(request):
                     if(h==12):
                         Ho = str(h)
                         Mi = str(m)
+                        if(len(Ho)==1):
+                            Ho = "0"+Ho
+                        if(len(Mi)==1):
+                            Mi = "0"+Mi
                         t=Ho+":"+Mi+"pm"
                         row[3] = t
                     elif(h>12):
                         h=h-12
                         Ho = str(h)
                         Mi = str(m)
+                        if(len(Ho)==1):
+                            Ho = "0"+Ho
+                        if(len(Mi)==1):
+                            Mi = "0"+Mi
                         t=Ho+":"+Mi+"pm"
                         row[3] = t
                     else:
                         Ho = str(h)
                         Mi = str(m)
+                        if(len(Ho)==1):
+                            Ho = "0"+Ho
+                        if(len(Mi)==1):
+                            Mi = "0"+Mi
                         t=Ho+":"+Mi+"am"
                         row[3] = t
                     res.append(row)
@@ -246,17 +279,29 @@ def SearchByDate(request):
                         if(h==12):
                             Ho = str(h)
                             Mi = str(m)
+                            if(len(Ho)==1):
+                                Ho = "0"+Ho
+                            if(len(Mi)==1):
+                                Mi = "0"+Mi
                             t=Ho+":"+Mi+"pm"
                             row[3] = t
                         elif(h>12):
                             h=h-12
                             Ho = str(h)
                             Mi = str(m)
+                            if(len(Ho)==1):
+                                Ho = "0"+Ho
+                            if(len(Mi)==1):
+                                Mi = "0"+Mi
                             t=Ho+":"+Mi+"pm"
                             row[3] = t
                         else:
                             Ho = str(h)
                             Mi = str(m)
+                            if(len(Ho)==1):
+                                Ho = "0"+Ho
+                            if(len(Mi)==1):
+                                Mi = "0"+Mi
                             t=Ho+":"+Mi+"am"
                             row[3] = t
                         res.append(row)
@@ -264,17 +309,29 @@ def SearchByDate(request):
                         if(h==12):
                             Ho = str(h)
                             Mi = str(m)
+                            if(len(Ho)==1):
+                                Ho = "0"+Ho
+                            if(len(Mi)==1):
+                                Mi = "0"+Mi
                             t=Ho+":"+Mi+"pm"
                             row[3] = t
                         elif(h>12):
                             h=h-12
                             Ho = str(h)
                             Mi = str(m)
+                            if(len(Ho)==1):
+                                Ho = "0"+Ho
+                            if(len(Mi)==1):
+                                Mi = "0"+Mi
                             t=Ho+":"+Mi+"pm"
                             row[3] = t
                         else:
                             Ho = str(h)
                             Mi = str(m)
+                            if(len(Ho)==1):
+                                Ho = "0"+Ho
+                            if(len(Mi)==1):
+                                Mi = "0"+Mi
                             t=Ho+":"+Mi+"am"
                             row[3] = t
                         res.append(row)
@@ -315,17 +372,29 @@ def SearchAll(request):
             if(h==12):
                 Ho = str(h)
                 Mi = str(m)
+                if(len(Ho)==1):
+                    Ho = "0"+Ho
+                if(len(Mi)==1):
+                    Mi = "0"+Mi
                 t=Ho+":"+Mi+"pm"
                 row[3] = t
             elif(h>12):
                 h=h-12
                 Ho = str(h)
                 Mi = str(m)
+                if(len(Ho)==1):
+                    Ho = "0"+Ho
+                if(len(Mi)==1):
+                    Mi = "0"+Mi
                 t=Ho+":"+Mi+"pm"
                 row[3] = t
             else:
                 Ho = str(h)
                 Mi = str(m)
+                if(len(Ho)==1):
+                    Ho = "0"+Ho
+                if(len(Mi)==1):
+                    Mi = "0"+Mi
                 t=Ho+":"+Mi+"am"
                 row[3] = t
             res.append(row)
@@ -342,18 +411,9 @@ def Notification(request):
 def AddNotification(request):
     try:
         notification=request.GET['notification']
-        today = datetime.date.today()
-        d = today.strftime("%y/%m/%d")
-        curr=""
-        for i in range(0,len(d)):
-            if d[i]=='/':
-                curr+="-"
-            else:
-                curr+=d[i]
-
-
+        
         row = {"notification":notification}
-        db.child('Notifications').child(curr).set(row)
+        db.child('Notifications').set(row)
         
         return render(request,"Notifications.html",{'status':True})
     except Exception as e:

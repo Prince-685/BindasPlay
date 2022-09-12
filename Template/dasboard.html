@@ -125,17 +125,29 @@
         let input3 = document.querySelector('#n3');
     
         btn1.addEventListener('click', () =>{
-            let x = Math.floor(Math.random() * 101);
-            input1.value=x;
+            let x = Math.floor(Math.random() * 100);
+            y = str(x)
+            if(x <= 9){
+                y="0"+y;
+            }
+            input1.value=y;
         });
     
         btn2.addEventListener('click', () =>{
-            let x = Math.floor(Math.random() * 101);
-            input2.value = x;
+            let x = Math.floor(Math.random() * 100);
+            y = str(x)
+            if(x <= 9){
+                y="0"+y;
+            }
+            input2.value = y;
         });
         btn3.addEventListener('click', () =>{
-            let x = Math.floor(Math.random() * 101);
-            input3.value = x;
+            let x = Math.floor(Math.random() * 100);
+            y = str(x)
+            if(x <= 9){
+                y="0"+y;
+            }
+            input3.value = y;
         });
     </script>
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
