@@ -178,6 +178,26 @@ tbody tr td:last-child{
     padding-left: 1rem;
 }
 
+.switches{
+    border: none;
+}
+
+.switches tr td a,.switches tr td button{
+    padding: 1rem 2rem;
+    border: 1px solid black;
+    color: #fff;
+    background: black;
+    text-align: center;
+    border-radius: .5rem;
+    font-size: 2rem;
+    text-decoration: none;
+    margin-left: 18rem;
+}
+
+.switches tr td{
+    border: none;
+    text-align: center;
+}
 
 .saveBtn{
     height: 3rem;
@@ -200,13 +220,7 @@ tbody tr td:last-child{
     align-items: center;
     font-size: 1.8rem;
 }
-#automatic1,#automatic2,#automatic3{
-    height: 3rem;
-    border-radius: .5rem;
-    font-size: 1.8rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
+
  
 
 @media (max-width:620px) {
@@ -254,9 +268,6 @@ tbody tr td:last-child{
     tbody tr{
         height: 6rem;
     }
-
-   
-    
     
     .Select{
         height: 1.8rem;
@@ -271,13 +282,14 @@ tbody tr td:last-child{
         margin-bottom: .5rem;
         width: 5rem;
     }
-    #automatic1,#automatic2,#automatic3{
-        height: 3rem;
+    .switches tr td a{
+        padding: .5rem 1rem;
         border-radius: .5rem;
-        font-size: 1.2rem;
-        padding-left: .2rem;
-        padding-right: .2rem;
+        font-size: 1.5rem;
+        text-decoration: none;
+        margin-left: 0rem;
     }
+    
 
     .saveBtn{
         font-size: 1.5rem;

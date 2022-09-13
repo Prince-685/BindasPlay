@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .import userview
+from .import auto
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',userview.Userview),
@@ -27,4 +29,8 @@ urlpatterns = [
     path('',include('authentication.urls')),
     path('notification/',userview.Notification),
     path('addNotification/',userview.AddNotification),
+    path('typeSubmit1/',auto.TypeSubmit1),
+    path('typeSubmit2/',auto.TypeSubmit2),
+    path('typeSubmit3/',auto.TypeSubmit3),
+    
 ]

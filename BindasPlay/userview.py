@@ -3,18 +3,17 @@ from django.shortcuts import render
 import datetime
 from random import randrange
 import pyrebase
-
-
+import schedule
 
 Config={
-    "apiKey": "AIzaSyCPxYzRtwgkbRTC2sYbflSCWR1OJw-CLNc",
-    "authDomain": "bindasplay-91539.firebaseapp.com",
-    "databaseURL": "https://bindasplay-43d58-default-rtdb.firebaseio.com",
+    'apiKey': "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
+    'authDomain': "bindasplay-43d58.firebaseapp.com",
+    'databaseURL': "https://bindasplay-43d58-default-rtdb.firebaseio.com",
     'projectId': "bindasplay-43d58",
     'storageBucket': "bindasplay-43d58.appspot.com",
-    "messagingSenderId": "566594345888",
-    "appId": "1:848155187545:web:7c9beefecba1479c5a1448",
-    "measurementId": "G-QYR2NPPB22"
+    'messagingSenderId': "566594345888",
+    'appId': "1:566594345888:web:7cb38cbcfeca0d22d622c5",
+    'measurementId': "G-T3LLGYGPT2"
 }
 
 firebase = pyrebase.initialize_app(Config)
@@ -24,13 +23,14 @@ db = firebase.database()
 def Userview(request):
     try:
         data = db.child('Notifications').get()
-        rows=[]
-        for x in data.each():
-            rows.append(x.val())
-        
-        row = rows[0]
+        if(data):
+            rows=[]
+            for x in data.each():
+                rows.append(x.val())
+            
+            row = rows[0]
 
-        return render(request,"Userinterface.html", {"row":row})
+        return render(request,"Userinterface.html",{"row":row})
     except Exception as e:
         print("error:",e)
         return render(request,"Userinterface.html")
@@ -49,27 +49,50 @@ def displayResult(request):
                 curr+=d[i]
 
         
-        data = db.child('data').child(curr).get()
+        data1 = db.child('data1').child(curr).get()
+        data2 = db.child('data2').child(curr).get()
+        data3 = db.child('data3').child(curr).get()
         
-        data_list=[]
-        rows=[]
-        for x in data.each():
-            data_list.append(x.val())
-            
-            for row in data_list:
-                d = row.values()
-                y=list(d)
-            rows.append(y)
+        rows1=[]
+        for x in data1.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num1'])
+            rows1.append(data_list)
+
+        rows2=[]
+        for x in data2.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num2'])
+            rows2.append(data_list)
         
+        rows3=[]
+        for x in data3.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num3'])
+            rows3.append(data_list)
+
+        new=[]
+        for i in range (len(rows1)):
+            all=[]
+            all.append(rows1[i][1])
+            all.append(rows2[i][1])
+            all.append(rows3[i][1])
+            all.append(rows1[i][0])
+            new.append(all)           
         now = datetime.datetime.now()
         time = now.time()
         hour = time.hour
         
         min= time.minute
-        
 
         res=[]
-        for row in rows:
+        for row in new:
             x = row[3]
             l = x.split(":")
             
@@ -139,38 +162,54 @@ def displayResult(request):
                     t=Ho+":"+Mi+"am"
                     row[3] = t
                 res.append(row)
-        return render(request,"displayresult.html",{'rows':res}) 
+        return render(request,"displayresult.html",{"rows":res}) 
     except Exception as e:
         print('err:  ',e)
         return render(request,"displayresult.html")
 
 
+
 def saveResult(request):
     try:
-        time=request.GET['time']
-        number1=request.GET['number1']
-        number2=request.GET['number2']
-        number3=request.GET['number3']
         today = datetime.date.today()
+        d= today.strftime("%y/%m/%d")
         
-        d = today.strftime("%y/%m/%d")
-        weekday = today.weekday()
-        print(weekday)
         curr=""
-        
         for i in range(0,len(d)):
             if d[i]=='/':
                 curr+="-"
             else:
                 curr+=d[i]
-        if(weekday!=6):
-            row = {"time":time,"num1":number1,"num2":number2,"num3":number3}
-            db.child('data').child(curr).child(time).set(row)
+
+        time=request.GET['time']
+        number1=request.GET['number1']
+        number2=request.GET['number2']
+        number3=request.GET['number3']
+        if(len(number1)==1):
+            number1 = "0"+number1
+        if(len(number2)==1):
+            number2 = "0"+number2
+        if(len(number3)==1):
+            number3 = "0"+number3
+
+        if(number1):
+            if(weekday!=6):
+                row={"num1":number1}
+                db.child('data1').child(curr).child(time).set(row)
+        if(number2):
+            if(weekday!=6):
+                row={"num2":number2}
+                db.child('data2').child(curr).child(time).set(row)
+        if(number3):
+            if(weekday!=6):
+                row={"num3":number3}
+                db.child('data3').child(curr).child(time).set(row)
         
         return render(request,"dasboard.html",{'status':True})
     except Exception as e:
        print("errrrrrrrrr",e)
        return render(request,"dasboard.html", {'status': False})
+
 
 
 def SearchByDate(request):
@@ -200,17 +239,41 @@ def SearchByDate(request):
         c_m = int(c_list[1])
         c_d = int(c_list[2])
         
-        data = db.child('data').child(curr).get()
-        data_list=[]
-        rows=[]
-        for x in data.each():
-            data_list.append(x.val())
-            
-            for row in data_list:
-                d = row.values()
-                y=list(d)
-            rows.append(y)
-      
+        data1 = db.child('data1').child(curr).get()
+        data2 = db.child('data2').child(curr).get()
+        data3 = db.child('data3').child(curr).get()
+        rows1=[]
+        for x in data1.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num1'])
+            rows1.append(data_list)
+
+        rows2=[]
+        for x in data2.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num2'])
+            rows2.append(data_list)
+        
+        rows3=[]
+        for x in data3.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num3'])
+            rows3.append(data_list)
+
+        new=[]
+        for i in range (len(rows1)):
+            all=[]
+            all.append(rows1[i][1])
+            all.append(rows2[i][1])
+            all.append(rows3[i][1])
+            all.append(rows1[i][0])
+            new.append(all)           
         now = datetime.datetime.now()
         time = now.time()
         hour = time.hour
@@ -223,7 +286,7 @@ def SearchByDate(request):
         if (c_m<=t_m and c_y<=t_y):
 
             if(c_d <t_d):
-                for row in rows:
+                for row in new:
                     x = row[3]
                     l = x.split(":")
                     
@@ -265,7 +328,7 @@ def SearchByDate(request):
                     res.append(row)
 
             elif (c_d==t_d):
-                for row in rows:
+                for row in new:
                     x = row[3]
                     l = x.split(":")
                     
@@ -346,19 +409,44 @@ def SearchAll(request):
         date = request.GET['date']
         curr=date[2:]
         
-        data = db.child('data').child(curr).get()
-        data_list=[]
-        rows=[]
-        for x in data.each():
-            data_list.append(x.val())
-            
-            for row in data_list:
-                d = row.values()
-                y=list(d)
-            rows.append(y)
+        data1 = db.child('data1').child(curr).get()
+        data2 = db.child('data2').child(curr).get()
+        data3 = db.child('data3').child(curr).get()
+        rows1=[]
+        for x in data1.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num1'])
+            rows1.append(data_list)
+
+        rows2=[]
+        for x in data2.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num2'])
+            rows2.append(data_list)
+        
+        rows3=[]
+        for x in data3.each():
+            data_list=[]
+            data_list.append(x.key())
+            y = x.val()
+            data_list.append(y['num3'])
+            rows3.append(data_list)
+
+        new=[]
+        for i in range (len(rows1)):
+            all=[]
+            all.append(rows1[i][1])
+            all.append(rows2[i][1])
+            all.append(rows3[i][1])
+            all.append(rows1[i][0])
+            new.append(all)       
 
         res=[]
-        for row in rows:
+        for row in new:
            
             l = row[3].split(":")
             
@@ -406,7 +494,15 @@ def SearchAll(request):
 
 
 def Notification(request):
-    return render(request,"Notifications.html")
+    data = db.child('Notifications').get()
+    rows=[]
+    if(data):
+        for x in data.each():
+            rows.append(x.val())
+        
+        row = rows[0]
+    return render(request,"Notifications.html",{"row":row})
+
 
 def AddNotification(request):
     try:
@@ -419,3 +515,4 @@ def AddNotification(request):
     except Exception as e:
        print("errrrrrrrrr",e)
        return render(request,"Notifications.html", {'status': False})
+

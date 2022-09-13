@@ -35,6 +35,29 @@
         </header>
 
         <main>
+            <table class="switches">
+                
+                <tbody>
+                    <tr>
+                        <td>
+                            <a href="/typeSubmit1">
+                                Automatic
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/typeSubmit2">
+                                Automatic
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/typeSubmit3">
+                                Automatic
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <table>
                 <thead>
                     <tr>
@@ -78,16 +101,13 @@
                                 </select>
                             </td>
                             <td>
-                                <input class="numberInput" required type="number" min="00" max="99" name="number1" id="n1" >
-                                <button type="button" id="automatic1"> Automatic</button>
+                                <input class="numberInput" type="number" min="00" max="99" name="number1" id="n1" >
                             </td>
                             <td>
-                                <input class="numberInput" required type="number" min="00" max="99" name="number2" id="n2" >
-                                <button type="button" id="automatic2"> Automatic</button>
+                                <input class="numberInput" type="number" min="00" max="99" name="number2" id="n2" >
                             </td>
                             <td>
-                                <input class="numberInput" required type="number" min="00" max="99" name="number3" id="n3" >
-                                <button type="button" id="automatic3"> Automatic</button>
+                                <input class="numberInput" type="number" min="00" max="99" name="number3" id="n3" >
                             </td>
                         </tr>
                         <tr >
@@ -115,41 +135,5 @@
         
     </div>
 
-
-    <script>
-        let btn1 = document.querySelector('#automatic1');
-        let btn2 = document.querySelector('#automatic2');
-        let btn3 = document.querySelector('#automatic3');
-        let input1 = document.querySelector('#n1');
-        let input2 = document.querySelector('#n2');
-        let input3 = document.querySelector('#n3');
-    
-        btn1.addEventListener('click', () =>{
-            let x = Math.floor(Math.random() * 100);
-            y = str(x)
-            if(x <= 9){
-                y="0"+y;
-            }
-            input1.value=y;
-        });
-    
-        btn2.addEventListener('click', () =>{
-            let x = Math.floor(Math.random() * 100);
-            y = str(x)
-            if(x <= 9){
-                y="0"+y;
-            }
-            input2.value = y;
-        });
-        btn3.addEventListener('click', () =>{
-            let x = Math.floor(Math.random() * 100);
-            y = str(x)
-            if(x <= 9){
-                y="0"+y;
-            }
-            input3.value = y;
-        });
-    </script>
-    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </body>
 </html>
