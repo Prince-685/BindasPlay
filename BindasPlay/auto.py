@@ -8,14 +8,14 @@ import datetime
 
 
 Config={
-    "apiKey": "AIzaSyCPxYzRtwgkbRTC2sYbflSCWR1OJw-CLNc",
-    "authDomain": "bindasplay-91539.firebaseapp.com",
-    "databaseURL": "https://bindasplay-91539-default-rtdb.firebaseio.com",
-    'projectId': "bindasplay-91539",
-    'storageBucket': "bindasplay-91539.appspot.com",
-    "messagingSenderId": "566594345888",
-    "appId": "1:848155187545:web:7c9beefecba1479c5a1448",
-    "measurementId": "G-QYR2NPPB22"
+    'apiKey': "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
+    'authDomain': "bindasplay-43d58.firebaseapp.com",
+    'databaseURL': "https://bindasplay-43d58-default-rtdb.firebaseio.com",
+    'projectId': "bindasplay-43d58",
+    'storageBucket': "bindasplay-43d58.appspot.com",
+    'messagingSenderId': "566594345888",
+    'appId': "1:566594345888:web:7cb38cbcfeca0d22d622c5",
+    'measurementId': "G-T3LLGYGPT2"
 }
 
 firebase = pyrebase.initialize_app(Config)
