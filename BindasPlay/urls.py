@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .import userview
 from .import auto
+from .import kalyanViews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +33,12 @@ urlpatterns = [
     path('typeSubmit1/',auto.TypeSubmit1),
     path('typeSubmit2/',auto.TypeSubmit2),
     path('typeSubmit3/',auto.TypeSubmit3),
-    
+
+    path('displayresultkalyan/',kalyanViews.displayResultKalyan),
+    path('saveresultkalyan/',kalyanViews.saveResultKalyan),
+    path('searchAllkalyan/',kalyanViews.SearchAllKalyan),
+    path('searchkalyan/',kalyanViews.SearchByDateKalyan),
+    path('typeSubmitkalyan1/',auto.TypeSubmitKalyan1),
+    path('typeSubmitkalyan2/',auto.TypeSubmitKalyan2),
+    path('typeSubmitkalyan3/',auto.TypeSubmitKalyan3),    
 ]
