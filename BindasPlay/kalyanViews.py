@@ -185,8 +185,7 @@ def saveResultKalyan(request):
         time = now.time()
         hour = time.hour
         
-        min= time.minute
-        if(hour <= h):
+        if(hour < h):
             if(number1):
                 if(weekday!=6):
                     row={"num1":number1}

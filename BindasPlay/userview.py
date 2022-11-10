@@ -4,6 +4,17 @@ import datetime
 from random import randrange
 import pyrebase
 
+# Config = {
+#   "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
+#   "authDomain": "bindasplay-cb08d.firebaseapp.com",
+#   "databaseURL": "https://bindasplay-cb08d-default-rtdb.firebaseio.com",
+#   "projectId": "bindasplay-cb08d",
+#   "storageBucket": "bindasplay-cb08d.appspot.com",
+#   "messagingSenderId": "374562043128",
+#   "appId": "1:374562043128:web:b3e70f1c0256afe407b70d",
+#   "measurementId": "G-67NLCESH35"
+# }
+
 Config = {
   "apiKey": "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
   "authDomain": "bindasplay-43d58.firebaseapp.com",
@@ -14,6 +25,7 @@ Config = {
   "appId": "1:566594345888:web:7cb38cbcfeca0d22d622c5",
   "measurementId": "G-T3LLGYGPT2"
 }
+
 
 firebase = pyrebase.initialize_app(Config)
 authe = firebase.auth()
@@ -203,7 +215,7 @@ def saveResult(request):
         hour = time.hour
         
         min= time.minute
-        if(hour <= h and min < m):
+        if(hour < h):
             if(number1):
                 if(weekday!=6):
                     row={"num1":number1}
@@ -216,6 +228,20 @@ def saveResult(request):
                 if(weekday!=6):
                     row={"num3":number3}
                     db.child('data3').child(curr).child(time1).set(row)
+        elif( hour==h):
+            if min<m :
+                if(number1):
+                    if(weekday!=6):
+                        row={"num1":number1}
+                        db.child('data1').child(curr).child(time1).set(row)
+                if(number2):
+                    if(weekday!=6):
+                        row={"num2":number2}
+                        db.child('data2').child(curr).child(time1).set(row)
+                if(number3):
+                    if(weekday!=6):
+                        row={"num3":number3}
+                        db.child('data3').child(curr).child(time1).set(row)
         
         return render(request,"dasboard.html",{'status':True})
     except Exception as e:
