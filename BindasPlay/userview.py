@@ -175,7 +175,6 @@ def displayResult(request):
                     row[3] = t
                 res.append(row)
 
-                print(res)
         return render(request,"displayresult.html",{"rows":res}) 
     except Exception as e:
         print('err:  ',e)
@@ -360,7 +359,7 @@ def SearchByDate(request):
                     t=Ho+":"+Mi+"am"
                     row[3] = t
                 res.append(row)
-        elif (c_m==t_m and c_y<=t_y):
+        elif (c_m==t_m and c_y==t_y):
 
             if(c_d <t_d):
                 for row in new:
@@ -403,98 +402,14 @@ def SearchByDate(request):
                         t=Ho+":"+Mi+"am"
                         row[3] = t
                     res.append(row)
-        elif (c_m<t_m and c_y<=t_y):
-            for row in new:
-                x=row[3]
-                l = x.split(":")
-                h_s = l[0]
-                m_s = l[1]
-                
-                h = int(h_s)
-                m = int(m_s)
-                
-                
-                if(h==12):
-                    Ho = str(h)
-                    Mi = str(m)
-                    if(len(Ho)==1):
-                        Ho = "0"+Ho
-                    if(len(Mi)==1):
-                        Mi = "0"+Mi
-                    t=Ho+":"+Mi+"pm"
-                    row[3] = t
-                elif(h>12):
-                    h=h-12
-                    Ho = str(h)
-                    Mi = str(m)
-                    if(len(Ho)==1):
-                        Ho = "0"+Ho
-                    if(len(Mi)==1):
-                        Mi = "0"+Mi
-                    t=Ho+":"+Mi+"pm"
-                    row[3] = t
-                else:
-                    Ho = str(h)
-                    Mi = str(m)
-                    if(len(Ho)==1):
-                        Ho = "0"+Ho
-                    if(len(Mi)==1):
-                        Mi = "0"+Mi
-                    t=Ho+":"+Mi+"am"
-                    row[3] = t
-                res.append(row)
-        elif (c_m==t_m and c_y<=t_y):
-
-            if(c_d <t_d):
-                for row in new:
-                    x = row[3]
-                    l = x.split(":")
-                    
-                    h_s = l[0]
-                    m_s = l[1]
-                    
-                    h = int(h_s)
-                    m = int(m_s)
-                    
-                    
-                    if(h==12):
-                        Ho = str(h)
-                        Mi = str(m)
-                        if(len(Ho)==1):
-                            Ho = "0"+Ho
-                        if(len(Mi)==1):
-                            Mi = "0"+Mi
-                        t=Ho+":"+Mi+"pm"
-                        row[3] = t
-                    elif(h>12):
-                        h=h-12
-                        Ho = str(h)
-                        Mi = str(m)
-                        if(len(Ho)==1):
-                            Ho = "0"+Ho
-                        if(len(Mi)==1):
-                            Mi = "0"+Mi
-                        t=Ho+":"+Mi+"pm"
-                        row[3] = t
-                    else:
-                        Ho = str(h)
-                        Mi = str(m)
-                        if(len(Ho)==1):
-                            Ho = "0"+Ho
-                        if(len(Mi)==1):
-                            Mi = "0"+Mi
-                        t=Ho+":"+Mi+"am"
-                        row[3] = t
-                    res.append(row)
-
             elif (c_d==t_d):
+                
                 for row in new:
                     x = row[3]
                     l = x.split(":")
                     
                     h_s = l[0]
                     m_s = l[1]
-                    
                     h = int(h_s)
                     m = int(m_s)
                     
@@ -559,6 +474,47 @@ def SearchByDate(request):
                             row[3] = t
                         res.append(row)
 
+        elif (c_m<t_m and c_y==t_y):
+            for row in new:
+                x=row[3]
+                l = x.split(":")
+                h_s = l[0]
+                m_s = l[1]
+                
+                h = int(h_s)
+                m = int(m_s)
+                
+                
+                if(h==12):
+                    Ho = str(h)
+                    Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
+                    t=Ho+":"+Mi+"pm"
+                    row[3] = t
+                elif(h>12):
+                    h=h-12
+                    Ho = str(h)
+                    Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
+                    t=Ho+":"+Mi+"pm"
+                    row[3] = t
+                else:
+                    Ho = str(h)
+                    Mi = str(m)
+                    if(len(Ho)==1):
+                        Ho = "0"+Ho
+                    if(len(Mi)==1):
+                        Mi = "0"+Mi
+                    t=Ho+":"+Mi+"am"
+                    row[3] = t
+                res.append(row)
+        
         return render(request,"resultbydate.html",{'rows':res}) 
     except Exception as e:
         print('errooooor:',e)

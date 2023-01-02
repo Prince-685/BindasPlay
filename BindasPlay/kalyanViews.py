@@ -318,7 +318,7 @@ def SearchByDateKalyan(request):
                         row[3] = t
                     res.append(row)
 
-        elif (c_m<t_m and c_y<=t_y):
+        elif (c_m<t_m and c_y==t_y):
             for row in new:
                     x = row[3]
                     l = x.split(":")
@@ -360,7 +360,7 @@ def SearchByDateKalyan(request):
                         row[3] = t
                     res.append(row)
 
-        elif (c_m==t_m and c_y<=t_y):
+        elif (c_m==t_m and c_y==t_y):
 
             if(c_d <t_d):
                 for row in new:
