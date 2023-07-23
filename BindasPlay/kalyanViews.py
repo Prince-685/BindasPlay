@@ -3,6 +3,20 @@ from django.shortcuts import render
 from random import randrange
 import pyrebase
 import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate
+from django.contrib.auth import logout
+from django.contrib import messages
+# Config = {
+#   "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
+#   "authDomain": "bindasplay-cb08d.firebaseapp.com",
+#   "databaseURL": "https://bindasplay-cb08d-default-rtdb.firebaseio.com",
+#   "projectId": "bindasplay-cb08d",
+#   "storageBucket": "bindasplay-cb08d.appspot.com",
+#   "messagingSenderId": "374562043128",
+#   "appId": "1:374562043128:web:b3e70f1c0256afe407b70d",
+#   "measurementId": "G-67NLCESH35"
+# }
 
 Config = {
   "apiKey": "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
@@ -152,10 +166,11 @@ def displayResultKalyan(request):
         return render(request,"kalyandisplayresult.html")
 
 
-
 def saveResultKalyan(request):
 
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         today = datetime.date.today()
         d= today.strftime("%y/%m/%d")
         
@@ -185,6 +200,11 @@ def saveResultKalyan(request):
         time = now.time()
         hour = time.hour
         
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
+            return render(request,"Userinterface.html")
         if(hour < h):
             if(number1):
                 if(weekday!=6):
@@ -276,7 +296,7 @@ def SearchByDateKalyan(request):
         
 
         res=[]
-        if (c_m<t_m and c_y<=t_y):
+        if (c_y<t_y):
             for row in new:
                     x = row[3]
                     l = x.split(":")
@@ -318,7 +338,49 @@ def SearchByDateKalyan(request):
                         row[3] = t
                     res.append(row)
 
-        elif (c_m==t_m and c_y<=t_y):
+        elif (c_m<t_m and c_y==t_y):
+            for row in new:
+                    x = row[3]
+                    l = x.split(":")
+                    
+                    h_s = l[0]
+                    m_s = l[1]
+                    
+                    h = int(h_s)
+                    m = int(m_s)
+                    
+                    
+                    if(h==12):
+                        Ho = str(h)
+                        Mi = str(m)
+                        if(len(Ho)==1):
+                            Ho = "0"+Ho
+                        if(len(Mi)==1):
+                            Mi = "0"+Mi
+                        t=Ho+":"+Mi+"pm"
+                        row[3] = t
+                    elif(h>12):
+                        h=h-12
+                        Ho = str(h)
+                        Mi = str(m)
+                        if(len(Ho)==1):
+                            Ho = "0"+Ho
+                        if(len(Mi)==1):
+                            Mi = "0"+Mi
+                        t=Ho+":"+Mi+"pm"
+                        row[3] = t
+                    else:
+                        Ho = str(h)
+                        Mi = str(m)
+                        if(len(Ho)==1):
+                            Ho = "0"+Ho
+                        if(len(Mi)==1):
+                            Mi = "0"+Mi
+                        t=Ho+":"+Mi+"am"
+                        row[3] = t
+                    res.append(row)
+
+        elif (c_m==t_m and c_y==t_y):
 
             if(c_d <t_d):
                 for row in new:

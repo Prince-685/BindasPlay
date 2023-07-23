@@ -1,7 +1,21 @@
 from django.shortcuts import render
+from django.contrib import messages
 from random import randrange
 import pyrebase
 import datetime
+from django.contrib.auth import authenticate
+
+
+# Config = {
+#   "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
+#   "authDomain": "bindasplay-cb08d.firebaseapp.com",
+#   "databaseURL": "https://bindasplay-cb08d-default-rtdb.firebaseio.com",
+#   "projectId": "bindasplay-cb08d",
+#   "storageBucket": "bindasplay-cb08d.appspot.com",
+#   "messagingSenderId": "374562043128",
+#   "appId": "1:374562043128:web:b3e70f1c0256afe407b70d",
+#   "measurementId": "G-67NLCESH35"
+# }
 
 
 Config = {
@@ -24,6 +38,8 @@ db = firebase.database()
 
 def TypeSubmit1(request):
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -56,7 +72,13 @@ def TypeSubmit1(request):
         
         min= time.minute
 
+        
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
 
+            return render(request,"Userinterface.html")
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -91,6 +113,8 @@ def TypeSubmit1(request):
 
 def TypeSubmit2(request):
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -124,7 +148,11 @@ def TypeSubmit2(request):
         
         min= time.minute
 
-
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
+            return render(request,"Userinterface.html")
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -157,6 +185,8 @@ def TypeSubmit2(request):
 
 def TypeSubmit3(request):
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -190,7 +220,11 @@ def TypeSubmit3(request):
         
         min= time.minute
 
-
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
+            return render(request,"Userinterface.html")
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -224,6 +258,8 @@ def TypeSubmit3(request):
 
 def TypeSubmitKalyan1(request):
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -258,6 +294,11 @@ def TypeSubmitKalyan1(request):
         
         min= time.minute
 
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
+            return render(request,"Userinterface.html")
 
         for t in L:
             h = int(t[0:2])
@@ -293,6 +334,8 @@ def TypeSubmitKalyan1(request):
 
 def TypeSubmitKalyan2(request):
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -325,6 +368,12 @@ def TypeSubmitKalyan2(request):
         hour = time.hour
         
         min= time.minute
+
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
+            return render(request,"Userinterface.html")
 
 
         for t in L:
@@ -361,6 +410,8 @@ def TypeSubmitKalyan2(request):
 
 def TypeSubmitKalyan3(request):
     try:
+        username = request.user.username
+        password = request.POST.get('password', None)
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -394,6 +445,11 @@ def TypeSubmitKalyan3(request):
         
         min= time.minute
 
+        user = authenticate(username=username, password=password)
+        if user is None:
+            messages.error(request, 'Username or password is incorrect. Please login again.')
+            # If authentication fails, return an error response
+            return render(request,"Userinterface.html")
 
         for t in L:
             h = int(t[0:2])

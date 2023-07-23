@@ -19,7 +19,7 @@
                     
                     
                     <div class="subheader">
-                        <a href="/admin" class="adminBtn">Admin</a>
+                        <a href="/adminlogin" class="adminBtn">Admin</a>
                     </div>
                     
                 </header>
@@ -57,8 +57,8 @@
                                 <h3>USER LOGIN</h3>
                             </div>
                             <div class="main-form">
-                                    <form action="/login" method="post">
-                                    {% csrf_token %}
+                                    <form action="/userlogin" >
+                                    
                                         <div class="result" style="color: red;">
                                             <strong>{{msg}}</strong>
                                         </div>
@@ -84,7 +84,16 @@
                                 </div> 
                         </div>
                     </div>
-    
+
+                    {% if messages %}
+                    <div id="alert-message" class="alert">
+                        <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
                     
                 </main>
                 <div class="disclaimer">
@@ -98,7 +107,24 @@
             </div>
     
         </div>
-    
+        
+        <script>
+            // JavaScript code to display the alert pop-up
+            document.addEventListener('DOMContentLoaded', function() {
+                const alertMessage = document.getElementById('alert-message');
+                if (alertMessage) {
+                    const messageList = alertMessage.querySelector('ul');
+                    if (messageList && messageList.childElementCount > 0) {
+                        const messages = messageList.getElementsByTagName('li');
+                        let alertText = '';
+                        for (let i = 0; i < messages.length; i++) {
+                            alertText += messages[i].innerText + '\n';
+                        }
+                        alert(alertText.trim());
+                    }
+                }
+            });
+        </script>
 
         
     

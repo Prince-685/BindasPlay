@@ -20,7 +20,7 @@ from .import auto
 from .import kalyanViews
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    
     path('',userview.Userview),
 
     path('displayresult/',userview.displayResult),
