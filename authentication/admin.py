@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.contrib import admin
 # Register your models here.
 from django.shortcuts import render, redirect
@@ -185,3 +186,8 @@ def AddUser(request):
 
 
 
+=======
+from django.contrib import admin
+
+# Register your models here.
+>>>>>>> bef1a1313f76ef3f7c82ced7344ab96c8179d76c

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 """BindasPlay URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -42,3 +43,49 @@ urlpatterns = [
     path('typeSubmitkalyan2/',auto.TypeSubmitKalyan2),
     path('typeSubmitkalyan3/',auto.TypeSubmitKalyan3),    
 ]
+=======
+"""BindasPlay URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+from .import userview
+from .import auto
+from .import kalyanViews
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',userview.Userview),
+
+    path('displayresult/',userview.displayResult),
+    path('saveresult/',userview.saveResult),
+    path('searchAll/',userview.SearchAll),
+    path('search/',userview.SearchByDate),
+    path('',include('authentication.urls')),
+    path('notification/',userview.Notification),
+    path('addNotification/',userview.AddNotification),
+    path('typeSubmit1/',auto.TypeSubmit1),
+    path('typeSubmit2/',auto.TypeSubmit2),
+    path('typeSubmit3/',auto.TypeSubmit3),
+
+    path('displayresultkalyan/',kalyanViews.displayResultKalyan),
+    path('saveresultkalyan/',kalyanViews.saveResultKalyan),
+    path('searchAllkalyan/',kalyanViews.SearchAllKalyan),
+    path('searchkalyan/',kalyanViews.SearchByDateKalyan),
+    path('typeSubmitkalyan1/',auto.TypeSubmitKalyan1),
+    path('typeSubmitkalyan2/',auto.TypeSubmitKalyan2),
+    path('typeSubmitkalyan3/',auto.TypeSubmitKalyan3),    
+]
+>>>>>>> bef1a1313f76ef3f7c82ced7344ab96c8179d76c
