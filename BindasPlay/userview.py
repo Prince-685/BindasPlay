@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from django.contrib.auth import logout
 from django.contrib import messages
+from authentication.views import checkUserCredentials
 
 # Config = {
 #   "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
@@ -187,8 +188,8 @@ def displayResult(request):
 
 def saveResult(request):
     try:
-        username = request.user.username
-        password = request.POST.get('password', None)
+        username = request.session.get('current_username')
+        passw = request.session.get('current_password')
         today = datetime.date.today()
         d= today.strftime("%y/%m/%d")
         
@@ -219,8 +220,8 @@ def saveResult(request):
         hour = time.hour
         min= time.minute
 
-        user = authenticate(username=username, password=password)
-        if user is None:
+        user = checkUserCredentials(username,passw)
+        if user==False:
             messages.error(request, 'Username or password is incorrect. Please login again.')
             # If authentication fails, return an error response
             return render(request,"Userinterface.html")

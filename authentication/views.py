@@ -55,7 +55,7 @@ def checkUserCredentials(username,password):
       key = x.key()
       value = x.val()
       credentials.append
-      print(key,value)
+      # print(key,value)
       if username == key and password == value:
          return True
   return False
@@ -78,15 +78,19 @@ def userLogin(request):
     d3= db2.child('kBtn3').child('b3').get()
     b3=d3.val()
     
-    username = request.GET['username']
-    passw = request.GET['pass1'] 
+    username = request.POST['username']
+    passw = request.POST['pass1'] 
     
     auth = checkUserCredentials(username,passw)
 
     if auth :
         if "bindas" in username:
+          request.session['current_username'] = username
+          request.session['current_password'] = passw
           return render(request, "dasboard.html",{"btn1":btn1,"btn2":btn2,"btn3":btn3})
         elif "kalyan" in username:
+           request.session['current_username'] = username
+           request.session['current_password'] = passw
            return render(request, "kalyandasboard.html",{"b1":b1,"b2":b2,"b3":b3})
     else:
       return render(request, "Userinterface.html",{'msg':'Wrong Username/Password'})

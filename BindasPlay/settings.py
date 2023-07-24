@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -112,8 +116,8 @@ USE_I18N = True
 
 USE_TZ = True
 
-SESSION_COOKIE_AGE = 60  # 30 minutes
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_COOKIE_AGE = 60  # 30 minutes
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 
