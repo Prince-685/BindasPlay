@@ -18,6 +18,7 @@ from django.urls import path, include
 from .import userview
 from .import auto
 from .import kalyanViews
+from . import adminviews
 
 urlpatterns = [
     
@@ -41,4 +42,15 @@ urlpatterns = [
     path('typeSubmitkalyan1/',auto.TypeSubmitKalyan1),
     path('typeSubmitkalyan2/',auto.TypeSubmitKalyan2),
     path('typeSubmitkalyan3/',auto.TypeSubmitKalyan3),    
+
+    #adminworks
+
+    path('atypeSubmit1/',adminviews.ATypeSubmit1),
+    path('atypeSubmit2/',adminviews.ATypeSubmit2),
+    path('atypeSubmit3/',adminviews.ATypeSubmit3),
+    path('atypeSubmitkalyan1/',adminviews.ATypeSubmitKalyan1),
+    path('atypeSubmitkalyan2/',adminviews.ATypeSubmitKalyan2),
+    path('atypeSubmitkalyan3/',adminviews.ATypeSubmitKalyan3),
+    path('asaveresult/',adminviews.AsaveResult),
+    path('asaveresultkalyan/',adminviews.AsaveResultKalyan),
 ]

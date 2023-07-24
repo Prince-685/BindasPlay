@@ -6,7 +6,6 @@ from django.contrib.auth import login as login_auth
 from django.views.decorators.clickjacking import xframe_options_exempt
 import pyrebase
 import requests
-
 Config = {
   "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
   "authDomain": "bindasplay-cb08d.firebaseapp.com",
@@ -87,7 +86,27 @@ def adminLogin(request):
 #         return render(request, "usersData.html")
 
 from django.contrib.auth import logout
+def updateAdminPasspage(request):
+   return render(request,'updateadminPass.html')
 
+def updateAdminPass(request):
+   cPass=request.GET['cPassword']
+   new_pass=request.GET['newPassword']
+   try:
+      data=db.child('admin').get()
+      for x in data:
+         key=x.key()
+         oldPass=x.val()
+         if oldPass==cPass:
+          db.child('admin').update({key:new_pass})
+
+          return render(request,'updateAdminPass.html',{'msg':'Password Updated Successfully'})
+         else:
+          return render(request,"updateAdminPass.html",{'msg':'Please enter correct currentPassowrd'})
+      
+   except Exception as e:
+      print('er00 : ',e)
+      return render(request,'updateAdminPass.html')
 
 def updatePassword(request):
     user = request.GET['username']

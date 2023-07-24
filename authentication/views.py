@@ -48,7 +48,12 @@ db2 = firebase1.database()
 
 def checkUserCredentials(username,password):
   data = db1.child("users").get()
-
+  # data2=db1.child("admin").get()
+  # for x in data2:
+  #    key=x.key()
+  #    value=x.val()
+  #    if username==key and password==value:
+  #       return True
   credentials = []
   for x in data.each():
       info = []

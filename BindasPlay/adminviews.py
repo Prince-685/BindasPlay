@@ -5,6 +5,7 @@ import pyrebase
 import datetime
 from django.contrib.auth import authenticate
 from authentication.views import checkUserCredentials
+from calendar import weekday
 
 
 
@@ -44,11 +45,9 @@ db = firebase.database()
 
  
 
-def TypeSubmit1(request):
+def ATypeSubmit1(request):
     try:
-        username = request.session.get('current_username')
-        passw = request.session.get('current_password')
-        print(username,passw)
+
         # print(username)
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
@@ -82,13 +81,6 @@ def TypeSubmit1(request):
         
         min= time.minute
 
-        
-        user = checkUserCredentials(username,passw)
-        print("8888 : " ,user)
-        if user==False:
-            messages.error(request, 'Username or password is incorrect. Please login again.')
-            # If authentication fails, return an error response
-            return render(request,"Userinterface.html")
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -114,17 +106,16 @@ def TypeSubmit1(request):
                 # d1 = db.child('btn1').child('b1').get()
                 # b1=d1.val()
             
-        return render(request,"dasboard.html")
+        return render(request,"adminbindas.html")
         # return render(request,"dasboard.html",{"btn1":b1,"btn2":btn2,"btn3":btn3})
     except Exception as e:
         print("errrr:",e)
-        return render(request,"dasboard.html")
+        return render(request,"adminbindas.html")
 
 
-def TypeSubmit2(request):
+def ATypeSubmit2(request):
     try:
-        username = request.session.get('current_username')
-        passw = request.session.get('current_password')
+
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -158,11 +149,6 @@ def TypeSubmit2(request):
         
         min= time.minute
 
-        user = checkUserCredentials(username,passw)
-        if user==False:
-            messages.error(request, 'Username or password is incorrect. Please login again.')
-            # If authentication fails, return an error response
-            return render(request,"Userinterface.html")
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -187,16 +173,15 @@ def TypeSubmit2(request):
 
             # d2 = db.child('btn2').child('b2').get()
             # b2=d2.val()
-        return render(request,"dasboard.html")
+        return render(request,"adminbindas.html")
         # return render(request,"dasboard.html",{"btn1":btn1,"btn2":b2,"btn3":btn3})
     except Exception as e:
         print("errrr:",e)
-        return render(request,"dasboard.html")
+        return render(request,"adminbindas.html")
 
-def TypeSubmit3(request):
+def ATypeSubmit3(request):
     try:
-        username = request.session.get('current_username')
-        passw = request.session.get('current_password')
+
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -230,11 +215,6 @@ def TypeSubmit3(request):
         
         min= time.minute
 
-        user = checkUserCredentials(username,passw)
-        if user==False:
-            messages.error(request, 'Username or password is incorrect. Please login again.')
-            # If authentication fails, return an error response
-            return render(request,"Userinterface.html")
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -260,17 +240,14 @@ def TypeSubmit3(request):
             # d3 = db.child('btn3').child('b3').get()
             # b3=d3.val()
             
-        return render(request,"dasboard.html")
+        return render(request,"adminbindas.html")
         # return render(request,"dasboard.html",{"btn1":btn1,"btn2":btn2,"btn3":b3})
     except Exception as e:
         print("errrr:",e)
-        return render(request,"dasboard.html")
+        return render(request,"adminbindas.html")
 
-def TypeSubmitKalyan1(request):
+def ATypeSubmitKalyan1(request):
     try:
-        username = request.session.get('current_username')
-        passw = request.session.get('current_password')
-        print(username,passw)
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -305,12 +282,6 @@ def TypeSubmitKalyan1(request):
         
         min= time.minute
 
-        user = checkUserCredentials(username,passw)
-        if user==False:
-            messages.error(request, 'Username or password is incorrect. Please login again.')
-            # If authentication fails, return an error response
-            return render(request,"Userinterface.html")
-
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -336,17 +307,15 @@ def TypeSubmitKalyan1(request):
             # dat1= db.child('kBtn1').child('b1').get()
             # btn1=dat1.val()
             
-        return render(request,"kalyandasboard.html")
+        return render(request,"adminkalyan.html")
         # return render(request,"kalyandasboard.html",{"b1":btn1,"b2":bt2,"b3":bt3})
     except Exception as e:
         print("errrr:",e)
-        return render(request,"kalyandasboard.html")
+        return render(request,"adminkalyan.html")
 
 
-def TypeSubmitKalyan2(request):
+def ATypeSubmitKalyan2(request):
     try:
-        username = request.session.get('current_username')
-        passw = request.session.get('current_password')
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -380,12 +349,6 @@ def TypeSubmitKalyan2(request):
         
         min= time.minute
 
-        user = checkUserCredentials(username,passw)
-        if user==False:
-            messages.error(request, 'Username or password is incorrect. Please login again.')
-            # If authentication fails, return an error response
-            return render(request,"Userinterface.html")
-
 
         for t in L:
             h = int(t[0:2])
@@ -412,17 +375,16 @@ def TypeSubmitKalyan2(request):
             # d2= db.child('kBtn2').child('b2').get()
             # btn2=d2.val()
             
-        return render(request,"kalyandasboard.html")
+        return render(request,"adminkalyan.html")
         # return render(request,"kalyandasboard.html",{"b1":bt1,"b2":btn2,"b3":bt3})
     except Exception as e:
         print("errrr:",e)
-        return render(request,"kalyandasboard.html")
+        return render(request,"adminkalyan.html")
 
 
-def TypeSubmitKalyan3(request):
+def ATypeSubmitKalyan3(request):
     try:
-        username = request.session.get('current_username')
-        passw = request.session.get('current_password')
+        
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -456,12 +418,6 @@ def TypeSubmitKalyan3(request):
         
         min= time.minute
 
-        user = checkUserCredentials(username,passw)
-        if user==False:
-            messages.error(request, 'Username or password is incorrect. Please login again.')
-            # If authentication fails, return an error response
-            return render(request,"Userinterface.html")
-
         for t in L:
             h = int(t[0:2])
             m = int(t[3:])
@@ -487,10 +443,127 @@ def TypeSubmitKalyan3(request):
             # d3= db.child('kBtn3').child('b3').get()
             # btn3=d3.val()
             
-        return render(request,"kalyandasboard.html")
+        return render(request,"adminkalyan.html")
         # return render(request,"kalyandasboard.html",{"b1":bt1,"b2":bt2,"b3":btn3})
     except Exception as e:
         print("errrr:",e)
-        return render(request,"kalyandasboard.html")
+        return render(request,"adminkalyan.html")
 
+def AsaveResult(request):
+    try:
 
+        today = datetime.date.today()
+        d= today.strftime("%y/%m/%d")
+        
+        curr=""
+        for i in range(0,len(d)):
+            if d[i]=='/':
+                curr+="-"
+            else:
+                curr+=d[i]
+
+        time1=request.GET['time']
+        number1=request.GET['number1']
+        number2=request.GET['number2']
+        number3=request.GET['number3']
+        if(len(number1)==1):
+            number1 = "0"+number1
+        if(len(number2)==1):
+            number2 = "0"+number2
+        if(len(number3)==1):
+            number3 = "0"+number3
+
+        curr_hour = time1[0:2]
+        curr_min = time1[3:]
+        h = int(curr_hour)
+        m = int(curr_min)
+        now = datetime.datetime.now()
+        time = now.time()
+        hour = time.hour
+        min= time.minute
+
+        if(hour < h):
+            if(number1):
+                if(weekday!=6):
+                    row={"num1":number1}
+                    db.child('data1').child(curr).child(time1).set(row)
+            if(number2):
+                if(weekday!=6):
+                    row={"num2":number2}
+                    db.child('data2').child(curr).child(time1).set(row)
+            if(number3):
+                if(weekday!=6):
+                    row={"num3":number3}
+                    db.child('data3').child(curr).child(time1).set(row)
+        elif( hour==h):
+            if min<m :
+                if(number1):
+                    if(weekday!=6):
+                        row={"num1":number1}
+                        db.child('data1').child(curr).child(time1).set(row)
+                if(number2):
+                    if(weekday!=6):
+                        row={"num2":number2}
+                        db.child('data2').child(curr).child(time1).set(row)
+                if(number3):
+                    if(weekday!=6):
+                        row={"num3":number3}
+                        db.child('data3').child(curr).child(time1).set(row)
+        
+        return render(request,"adminbindas.html",{'status':True})
+    except Exception as e:
+       print("errrrrrrrrr",e)
+       return render(request,"adminbindas.html", {'status': False})
+
+def AsaveResultKalyan(request):
+
+    try:
+
+        today = datetime.date.today()
+        d= today.strftime("%y/%m/%d")
+        
+        curr=""
+        for i in range(0,len(d)):
+            if d[i]=='/':
+                curr+="-"
+            else:
+                curr+=d[i]
+
+        time2=request.GET['kalyantime']
+        number1=request.GET['kalyannumber1']
+        number2=request.GET['kalyannumber2']
+        number3=request.GET['kalyannumber3']
+        if(len(number1)==1):
+            number1 = "0"+number1
+        if(len(number2)==1):
+            number2 = "0"+number2
+        if(len(number3)==1):
+            number3 = "0"+number3
+
+        curr_hour = time2[0:2]
+        curr_min = time2[3:]
+        h = int(curr_hour) 
+        m = int(curr_min)
+        now = datetime.datetime.now()
+        time = now.time()
+        hour = time.hour
+        
+        
+        if(hour < h):
+            if(number1):
+                if(weekday!=6):
+                    row={"num1":number1}
+                    db.child('kalyandata1').child(curr).child(time2).set(row)
+            if(number2):
+                if(weekday!=6):
+                    row={"num2":number2}
+                    db.child('kalyandata2').child(curr).child(time2).set(row)
+            if(number3):
+                if(weekday!=6):
+                    row={"num3":number3}
+                    db.child('kalyandata3').child(curr).child(time2).set(row)
+        
+        return render(request,"adminkalyan.html",{'status':True})
+    except Exception as e:
+       print("errrrrrrrrr",e)
+       return render(request,"adminkalyan.html", {'status': False})
