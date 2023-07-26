@@ -87,7 +87,7 @@ def adminLogin(request):
 
 from django.contrib.auth import logout
 def updateAdminPasspage(request):
-   return render(request,'updateadminPass.html')
+   return render(request,'updateAdminPass.html')
 
 def updateAdminPass(request):
    cPass=request.GET['cPassword']
