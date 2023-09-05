@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Dashboard</title>
+    <link rel="stylesheet" href="/static/panelDashboard2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <header><a href="/">BINDAS PLAY</a></header>
+            <div class="admin">
+                <a href="/usersData">Admin</a>
+            </div>
+        </div>
+
+        <div class="subheader">
+            <header>{{row.0}}</header>
+        </div>
+        
+        <div class="buttons">
+            <a href="/aautomilan2saveresult">Automatic</a>
+            <a href="/aholiday2">Holiday</a>
+        </div>
+        
+        <div class="content">
+            <form action="/amilan2saveresult">
+                <div class="form-content">
+                    <div>
+                        <label for="type">Select Type:</label>
+                        <select id="type" name="type">
+                            <option >Select Type</option>
+                            <option value="open">Open</option>
+                            <option value="close">Close</option>
+                        </select>
+                    </div>
+    
+                    <div class="firstNum">
+                        <label for="firstNum">First Number:</label>
+                        <input type="number" name="firstNum" id="firstNum" placeholder="Enter First Number">
+                    </div>
+    
+                    <div class="secondNum">
+                        <label for="secondNum">Second Number:</label>
+                        <input type="number" name="secondNum" id="secondNum" placeholder="Enter Second Number">
+                    </div>
+                    <div class="thirdNum">
+                        <label for="thirdNum">Third Number:</label>
+                        <input type="number" name="thirdNum" id="thirdNum" placeholder="Enter Third Number">
+                    </div>
+                </div>
+
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+                
+            </form>
+            <!-- {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %} -->
+        </div>
+        
+
+        <div class="gameNameContent">
+            <div class="gameHeader">Add Game Name</div>
+            <form action="/game2name">
+                <input type="text" name="GameName" placeholder="Enter Game Name"/>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+    </div>
+
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

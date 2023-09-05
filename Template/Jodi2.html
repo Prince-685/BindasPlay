@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jodi</title>
+    <link rel="stylesheet" href="/static/jodi2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/">BindasPlayWin</a>
+        </div>
+
+
+        <div class="chartHeader">
+            {{gname.0}} JODI CHART
+        </div>
+
+        <div class="refresh-button">
+            <h3>{{gname.0}} NIGHT</h3>
+            <button id="refreshButton">
+                Refresh Result
+            </button>
+        </div>
+        
+        <div id="top"></div>
+        
+        <div class="bottom-button">
+            <button onclick="scrollToDiv('bottom')">
+                Go to bottom
+            </button>
+        </div>
+
+        <div class="content">
+            <div class="table-header">
+                {{gname.0}} NIGHT MATKA JODI RECORD
+            </div>
+            
+            {% if rows %}
+            <table class="chart-table" cellpadding="2">
+                <thead> 
+                <tr>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+                </thead>                	
+                <tbody>
+                    {% for row in rows %}
+                        <tr>
+                            {% if row.1 in listRed %}
+                            <td style="color: red;">{{row.1}}</td>
+                            {% else %}
+                            <td>{{row.1}}</td>
+                            {% endif %}
+
+                            {% if row.2 in listRed %}
+                            <td style="color: red;">{{row.2}}</td>
+                            {% else %}
+                            <td>{{row.2}}</td>
+                            {% endif %}
+
+                            {% if row.3 in listRed %}
+                            <td style="color: red;">{{row.3}}</td>
+                            {% else %}
+                            <td>{{row.3}}</td>
+                            {% endif %}
+
+                            {% if row.4 in listRed %}
+                            <td style="color: red;">{{row.4}}</td>
+                            {% else %}
+                            <td>{{row.4}}</td>
+                            {% endif %}
+
+                            {% if row.5 in listRed %}
+                            <td style="color: red;">{{row.5}}</td>
+                            {% else %}
+                            <td>{{row.5}}</td>
+                            {% endif %}
+
+                            {% if row.6 in listRed %}
+                            <td style="color: red;">{{row.6}}</td>
+                            {% else %}
+                            <td>{{row.6}}</td>
+                            {% endif %}
+                            
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+
+        <div class="refresh-button">
+            <h3>{{gname.0}} AFTERNOON</h3>
+            <button id="refreshButton2">
+                Refresh Result
+            </button>
+        </div>
+
+        <div id="bottom"></div>
+        <div class="top-button" onclick="scrollToDiv('top')">
+            <button>Go to Top</button>
+        </div>
+    </div>
+        
+            
+    <script>
+        function scrollToDiv(divId) {
+          const element = document.getElementById(divId);
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+
+        document.getElementById("refreshButton").addEventListener("click", function() {
+            location.reload();
+        });
+
+        document.getElementById("refreshButton2").addEventListener("click", function() {
+            location.reload();
+        });
+    </script>
+</body>
+</html>

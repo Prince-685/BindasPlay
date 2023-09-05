@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MILAN2 Dashboard</title>
+    <link rel="stylesheet" href="/static/userPanelDashboard2.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <header><a href="/">{{row.0}}</a></header>
+        </div>
+
+        <div class="buttons">
+            <a href="/automilan2saveresult">Automatic</a>
+            <a href="/holidaymilan2">Holiday</a>
+        </div>
+
+        <div class="content">
+            <form action="/saveresultmilan2">
+                <div class="form-content">
+                    <div>
+                        <label for="type">Select Type:</label>
+                        <select id="type" name="type">
+                            <option >Select Type</option>
+                            <option value="open">Open</option>
+                            <option value="close">Close</option>
+                        </select>
+                    </div>
+    
+                    <div class="firstNum">
+                        <label for="firstNum">First Number:</label>
+                        <input type="number" name="firstNum" id="firstNum" placeholder="Enter First Number">
+                    </div>
+    
+                    <div class="secondNum">
+                        <label for="secondNum">Second Number:</label>
+                        <input type="number" name="secondNum" id="secondNum" placeholder="Enter Second Number">
+                    </div>
+                    <div class="thirdNum">
+                        <label for="thirdNum">Third Number:</label>
+                        <input type="number" name="thirdNum" id="thirdNum" placeholder="Enter Third Number">
+                    </div>
+                </div>
+
+                <div class="button">
+                    <button type="submit">Submit</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

@@ -45,6 +45,21 @@ firebase2 = pyrebase.initialize_app(Config2)
 authe2 = firebase1.auth()
 db2 = firebase1.database()
 
+Config3 = {
+  "apiKey": "AIzaSyDxFBqlyY2_eNGJRNyya4F0lS8vR4ArCrM",
+  "authDomain": "milan-71cf2.firebaseapp.com",
+  "databaseURL":"https://milan-71cf2-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "milan-71cf2",
+  "storageBucket": "milan-71cf2.appspot.com",
+  "messagingSenderId": "908285293971",
+  "appId": "1:908285293971:web:cbf52f52b75f5afc846466"
+}
+
+
+firebase3=pyrebase.initialize_app(Config3)
+auth=firebase3.auth()
+db3=firebase3.database()
+
 
 def checkUserCredentials(username,password):
   data = db1.child("users").get()
@@ -97,6 +112,19 @@ def userLogin(request):
            request.session['current_username'] = username
            request.session['current_password'] = passw
            return render(request, "kalyandasboard.html",{"b1":b1,"b2":b2,"b3":b3})
+      
+        elif "milan1" in username:
+           request.session['current_username'] = username
+           request.session['current_password'] = passw
+           g1=db3.child('Gname').child('G1').child('G1').get().val()
+           row=[g1]
+           return render(request, "Userpaneldashboard.html",{'row':row})
+        elif "milan2" in username:
+           request.session['current_username'] = username
+           request.session['current_password'] = passw
+           g2=db3.child('Gname').child('G2').child('G2').get().val()
+           row=[g2]
+           return render(request, "Userpanel2dashboard.html",{'row':row})
     else:
       return render(request, "Userinterface.html",{'msg':'Wrong Username/Password'})
   except Exception as e:

@@ -30,11 +30,66 @@
                             Notice!
                         </div>
                         <strong>
-                            {{row}}
+                            {{row.0}}
                         </strong>
                     </div>
+
+                <div class="liveResult" >
+                    <div class="heading">
+                        LIVE RESULT
+                    </div>
+                    <div class="gameLive">
+                        <div class="top">{{row.1}}</div>
+                        <div class="center">
+                            {{result1.0}}
+                        </div>
+                        <div class="bottom">
+                            <button id="refreshButton">
+                                Refresh Result
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="gameLive">
+                        <div class="top">{{row.2}}
+                        </div>
+                        <div class="center">
+                            {{result2.0}}
+                        </div>
+                        <div class="bottom">
+                            <button id="refreshButton">
+                                Refresh Result
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game">
+                    <div class="gameLeft">
+                        <a href="/jodiresult"><button>Jodi</button></a>
+                    </div>
+                    <div class="gameCenter">
+                        <div class="gameName">{{row.1}}</div>
+                        <div class="gameTime">01:30 PM &nbsp;&nbsp;  03:30 PM</div>
+                    </div>
+                    <div class="gameRight">
+                        <a href="/panelresult"><button>Panel</button></a>
+                    </div>
+                </div>
+
+                <div class="game">
+                    <div class="gameLeft">
+                        <a href="/jodi2result"><button>Jodi</button></a>
+                    </div>
+                    <div class="gameCenter">
+                        <div class="gameName">{{row.2}}</div>
+                        <div class="gameTime">08:30 PM &nbsp;&nbsp;  10:30PM</div>
+                    </div>
+                    <div class="gameRight">
+                        <a href="/panel2result"><button>Panel</button></a>
+                    </div>
+                </div>
                 {% endif %}
-        
                 <div class="result" >
                     For Bindas Results Click Here
                     <a href="/displayresult">
@@ -123,6 +178,10 @@
                         alert(alertText.trim());
                     }
                 }
+            });
+
+            document.getElementById("refreshButton").addEventListener("click", function() {
+                location.reload();
             });
         </script>
 

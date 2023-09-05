@@ -30,23 +30,102 @@ Config = {
   "appId": "1:566594345888:web:7cb38cbcfeca0d22d622c5",
   "measurementId": "G-T3LLGYGPT2"
 }
-
-
 firebase = pyrebase.initialize_app(Config)
 authe = firebase.auth()
 db = firebase.database()
 
+Config2 = {
+  "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
+  "authDomain": "bindasplay-cb08d.firebaseapp.com",
+  "databaseURL": "https://bindasplay-cb08d-default-rtdb.firebaseio.com",
+  "projectId": "bindasplay-cb08d",
+  "storageBucket": "bindasplay-cb08d.appspot.com",
+  "messagingSenderId": "374562043128",
+  "appId": "1:374562043128:web:b3e70f1c0256afe407b70d",
+  "measurementId": "G-67NLCESH35"
+}
+
+firebase1 = pyrebase.initialize_app(Config2)
+authe1 = firebase1.auth()
+db1 = firebase.database()
+
+Config3 = {
+  "apiKey": "AIzaSyDxFBqlyY2_eNGJRNyya4F0lS8vR4ArCrM",
+  "authDomain": "milan-71cf2.firebaseapp.com",
+  "databaseURL":"https://milan-71cf2-default-rtdb.asia-southeast1.firebasedatabase.app",
+  "projectId": "milan-71cf2",
+  "storageBucket": "milan-71cf2.appspot.com",
+  "messagingSenderId": "908285293971",
+  "appId": "1:908285293971:web:cbf52f52b75f5afc846466"
+}
+
+
+firebase2=pyrebase.initialize_app(Config3)
+auth=firebase2.auth()
+db2=firebase2.database()
+
+
 def Userview(request):
     try:
+        today = datetime.date.today()
+        d= today.strftime('%y-%m-%d')
         data = db.child('Notifications').get()
-        if(data):
-            rows=[]
-            for x in data.each():
-                rows.append(x.val())
+        data1=db2.child('Game1').child(d).child('open').child('number').get().val()
+        data2=db2.child('Game1').child(d).child('center').child('number').get().val()
+        data3=db2.child('Game1').child(d).child('close').child('number').get().val()
+        d1=db2.child('Game2').child(d).child('open').child('number').get().val()
+        d2=db2.child('Game2').child(d).child('center').child('number').get().val()
+        d3=db2.child('Game2').child(d).child('close').child('number').get().val()
+        g1=db2.child('Gname').child('G1').child('G1').get().val()
+        g2=db2.child('Gname').child('G2').child('G2').get().val()
+        result1=[]
+        result2=[]
+        if data1 and data2:
+            now = datetime.datetime.now()
+            time = now.time()
+            hour = time.hour
+            min= time.minute
+            time_min = hour * 60 + min 
+            if time_min>=810:
+                r1=data1+'-'+data2[0]
+                result1.append(r1)
+                if time_min>=930 and data3:
+                    r2=data1+'-'+data2+'-'+data3
+                    result1[0]=r2
+            else:result1.append('Coming Soon')
             
-            row = rows[0]
+        else:
+            result1.append('Coming Soon...')
 
-        return render(request,"Userinterface.html",{"row":row})
+        
+        if d1 and d2:
+            now = datetime.datetime.now()
+            time = now.time()
+            hour = time.hour
+            min= time.minute
+            time_min = hour * 60 + min 
+            if time_min>=1230:
+                r=d1+'-'+d2[0]
+                result2.append(r)
+                if d3 and time_min>=1350:
+                    r=d1+'-'+d2+'-'+d3
+                    result2[0]=r
+                
+            else:result2.append('Coming Soon...')
+
+            
+        else:
+            result2.append('Coming Soon...')
+        row=[]
+        if(data):
+            for x in data.each():
+                row.append(x.val())
+
+        row.append(g1)
+        row.append(g2)
+        
+
+        return render(request,"Userinterface.html",{"row":row,'result1':result1,'result2':result2})
     except Exception as e:
         print("error:",e)
         return render(request,"Userinterface.html")

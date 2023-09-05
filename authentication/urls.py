@@ -11,5 +11,7 @@ urlpatterns = [
      path('addUser/',admin.AddUser),
      path('updateAdminPasspage/',admin.updateAdminPasspage),
      path('updateAdminPass/',admin.updateAdminPass),
-
+     path('milanpage/',admin.Milan1page),
+     path('milan2page/',admin.Milan2page),
+     
 ]
