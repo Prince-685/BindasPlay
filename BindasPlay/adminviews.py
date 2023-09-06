@@ -843,13 +843,13 @@ def PreviousDatapage(request):
 
 def AddPreviousdata(request):
     try:
-        gname=request.GET['gametype']
+        gname=request.GET['gameName']
         date=request.GET['date']
         slot=request.GET['type']
         n1=request.GET['firstNum']
         n2=request.GET['secondNum']
         n3=request.GET['thirdNum']
-        date=date.strftime('%y-%m-%d')
+        date=date[2:]
 
         a=str(n1)+str(n2)+str(n3)
         if slot=='open':
