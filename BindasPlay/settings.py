@@ -32,6 +32,7 @@ CSRF_TRUSTED_ORIGINS = ['http://*.bindasplaywin.in','http://*.127.0.0.1','https:
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,6 +86,9 @@ DATABASES = {
     }
 }
 
+BACKGROUND_TASK_RUN_ASYNC = True
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -133,3 +137,37 @@ STATICFILES_DIRS=(os.path.join(BASE_DIR,"assets"),)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CRONJOBS = [
+    ('00 01 * * *', 'authentication.cron.AutoSubmitMilanGame1Data'),
+    ('02 01 * * *', 'authentication.cron.AutoSubmitMilanGame2Data'),
+    ('04 01 * * *', 'authentication.cron.BindasAutomatic'),
+    ('06 01 * * *', 'authentication.cron.KalyanAutomatic'),
+]
+
+import os
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "demo.log"),
+        },
+    },
+    "root": {
+        "handlers": ["file"],
+        "level": "WARNING",
+    },
+}
