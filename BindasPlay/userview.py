@@ -86,10 +86,10 @@ def Userview(request):
             hour = time.hour
             min= time.minute
             time_min = hour * 60 + min 
-            if time_min>=810:
+            if time_min>=780:
                 r1=data1+'-'+data2[0]
                 result1.append(r1)
-                if time_min>=930 and data3:
+                if time_min>=900 and data3:
                     r2=data1+'-'+data2+'-'+data3
                     result1[0]=r2
             else:result1.append('Coming Soon')
@@ -104,10 +104,10 @@ def Userview(request):
             hour = time.hour
             min= time.minute
             time_min = hour * 60 + min 
-            if time_min>=1230:
+            if time_min>=1200:
                 r=d1+'-'+d2[0]
                 result2.append(r)
-                if d3 and time_min>=1350:
+                if d3 and time_min>=1380:
                     r=d1+'-'+d2+'-'+d3
                     result2[0]=r
                 

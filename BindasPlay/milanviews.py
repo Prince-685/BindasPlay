@@ -3,7 +3,7 @@ from django.shortcuts import render
 from random import randrange
 import pyrebase
 import datetime
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 from authentication.views import checkUserCredentials
 from django.contrib import messages
 import random
@@ -165,167 +165,129 @@ def Holidaysubmit(request):
 
 def displayMilanPanelResult(request):
     try:
-        g1=db2.child('Gname').child('G1').child('G1').get().val()
-        gname=[g1]
-
         listRed = ["00","11","22","33","44","55","66","77","88","99","05","50","16","61","27","72","38","83","49","94","**"]
+        g1 = db2.child('Gname').child('G1').child('G1').get().val()
+        gname = [g1]
+
+        game_data = db2.child('Game1').get().val()
+        if not game_data:
+            return render(request, 'Userinterface.html')
+
         today = datetime.date.today()
-        d = today.strftime('%y-%m-%d')
-
-        day=today.strftime("%A")
-        x=db2.child('Game1').get()
-        date=[]
-        slot=[]
-        for a in x.each():
-             y=a.key()
-             date.append(y)
-             s=db2.child('Game1').child(y).get()
-             arr=[]
-             for b in s.each():
-                  
-                  d=b.key()
-                  f=db2.child('Game1').child(y).child(d).get()
-                  l=f.val()
-                  value=l['number']
-                  arr.append(value)
-             slot.append(arr)
-        res=[]
-        for i in range(len(date)):
-            date_obj = dt.strptime(date[i], "%y-%m-%d").date()
-
-            day = date_obj.strftime("%A")
-            curr=''
-            if day=='Monday':
-                days_until_next_sunday = 6  # If today is Sunday, move to the next Sunday
-                next_sunday = date_obj + datetime.timedelta(days=days_until_next_sunday)
-                curr=date[i] +' '+'to'+' '+str(next_sunday)
-                res.append(curr)
-            
-            today = datetime.date.today()
-            d = today.strftime('%y-%m-%d')
-            now = datetime.datetime.now()
-            time = now.time()
-            hour = time.hour
-            min= time.minute
-
-            time_min = hour * 60 + min
-
-            if int(d[:2]) > int(date[i][:2]):
-                res.append(slot[i][0])
-                res.append(slot[i][1])
-                res.append(slot[i][2])
-            elif int(d[:2]) == int(date[i][:2]):
-                if int(d[3:5]) > int(date[i][3:5]):
-                    res.append(slot[i][0])
-                    res.append(slot[i][1])
-                    res.append(slot[i][2])
-                elif int(d[3:5]) == int(date[i][3:5]):
-                    if int(d[6:]) > int(date[i][6:]):
-                        res.append(slot[i][0])
-                        res.append(slot[i][1])
-                        res.append(slot[i][2])
-                    elif int(d[6:]) == int(date[i][6:]):
-                        if time_min >= 810:
-                            res.append(slot[i][0][0])
-                            res.append(" ")
-                            res.append(slot[i][2])
-                        if time_min >= 930:
-                            res[len(res)-3] = slot[i][0]
-                            res[len(res)-2] = slot[i][1]
+        current_week_day = today.weekday()
+        now = datetime.datetime.now()
+        current_time = now.hour * 60 + now.minute  
         
-        result = []
-        current_sublist = []
+        result = []  
+        today_data = [] 
 
-        for item in res:
-            if isinstance(item, str) and ('to' in item):
-                if current_sublist:
-                    result.append(current_sublist)
-                current_sublist = [item]
+        for date_str, slots in sorted(game_data.items()):
+            date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+            start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+            end_of_week = start_of_week + datetime.timedelta(days=6)
+
+            week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+
+            if not any(week_id in sublist for sublist in result):
+                result.append([week_id])
+
+            week_list = next(sublist for sublist in result if week_id in sublist)
+
+            # Check if the current date is today
+            if date_obj == today:
+                if current_time >= 780:  # after 1pm
+                    today_data = [week_id]
+                    if current_time < 900:  # after 1pm and before 3pm
+                        numbers = [val['number'] for slot, val in slots.items() if 'number' in val]
+                        print(numbers)
+                        if numbers:
+                            today_data.append(numbers[0][0])
+                            today_data.append("")
+                            today_data.append(numbers[2])
+                    else:  # after 3pm
+                        today_data.extend(val['number'] for slot, val in slots.items() if 'number' in val)
             else:
-                current_sublist.append(item)
+                # Append all numbers from other dates
+                week_list.extend(val['number'] for slot, val in slots.items() if 'number' in val)
 
-        if current_sublist:
-            result.append(current_sublist)
-        
-        return render(request,'Panel.html',{'rows':result,"listRed":listRed,'gname':gname})
-             
+        # Append today's data if it's available
+        if today_data:
+            if current_week_day == 0:
+                date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+                start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+                end_of_week = start_of_week + datetime.timedelta(days=6)
+
+                week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+                result.append[week_id]
+                result.extend(today_data[1:])
+            else:
+                result[-1].extend(today_data[1:])
+                    
+        return render(request, 'Panel.html', {'rows': result,"listRed": listRed,'gname': gname})
+
     except Exception as e:
-        print('err::-',e)
-        return render(request,'Userinterface.html')
+        print('err::-', e)
+        return render(request, 'Userinterface.html')
 
 
 def displayMilanJodiresult(request):
     try:
-        g1=db2.child('Gname').child('G1').child('G1').get().val()
-        gname=[g1]
+        g1 = db2.child('Gname').child('G1').child('G1').get().val()
+        gname = [g1]
 
-        listRed = ["00","11","22","33","44","55","66","77","88","99","05","50","16","61","27","72","38","83","49","94","**"]
-        date=[]
-        val=[]
-        data=db2.child("Game1").get()
-        for x in data.each():
-            x=x.key()
-            date.append(x)
-            y=db2.child("Game1").child(x).child('center').get()
-            ordered_dict = y.val()
-            value = ordered_dict['number']
-            val.append(value)
-        
-        res=[]
-        for i in range(len(date)):
-            date_obj = dt.strptime(date[i], "%y-%m-%d").date()
+        game_data = db2.child("Game1").get().val()
 
-            day = date_obj.strftime("%A")
-            curr=''
-            if day=='Monday':
-                days_until_next_sunday = 6  # If today is Sunday, move to the next Sunday
-                next_sunday = date_obj + datetime.timedelta(days=days_until_next_sunday)
-                curr=date[i] +' '+'to'+' '+str(next_sunday)
-                res.append(curr)
-
-            today = datetime.date.today()
-            d = today.strftime('%y-%m-%d')
-            now = datetime.datetime.now()
-            time = now.time()
-            hour = time.hour
-            min= time.minute
-
-            time_min = hour * 60 + min
-
-            if int(d[:2]) > int(date[i][:2]):
-                res.append(val[i])
-            elif int(d[:2]) == int(date[i][:2]):
-                if int(d[3:5]) > int(date[i][3:5]):
-                    res.append(val[i])
-                elif int(d[3:5]) == int(date[i][3:5]):
-                    if int(d[6:]) > int(date[i][6:]):
-                       res.append(val[i])
-                    elif int(d[6:]) == int(date[i][6:]):
-                        if time_min >= 810:
-                            res.append(val[i][0])
-                        if time_min >= 930:
-                            res[len(res)-1] = val[i]
-        
         result = []
-        current_sublist = []
+        current_week = None
+        current_week_data = []
 
-        for item in res:
-            if isinstance(item, str) and ('to' in item):
-                if current_sublist:
-                    result.append(current_sublist)
-                current_sublist = [item]
-            else:
-                current_sublist.append(item)
+        now = datetime.datetime.now()
+        current_time = now.time()
+        today_date = now.date().strftime('%y-%m-%d')
 
-        if current_sublist:
-            result.append(current_sublist)
+        for date_str, day_data in sorted(game_data.items()):
+            date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+            start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+            end_of_week = start_of_week + datetime.timedelta(days=6)
 
-        return render(request,'Jodi.html',{'rows':result,"listRed":listRed,'gname':gname})
+            week_range = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+            
+            if current_week != week_range:
+                if current_week_data:
+                    result.append(current_week_data)
+                current_week = week_range
+                current_week_data = [week_range]
+            
+            if date_str == today_date:
+                # Skip today's data if the current time is before 1 PM
+                if current_time < datetime.time(13, 0):
+                    continue
+                # Include only the first digit of today's data if the current time is between 1 PM and 3 PM
+                elif datetime.time(13, 0) <= current_time < datetime.time(15, 0):
+                    # Assuming 'number' is a string
+                    current_week_data.append(day_data['center']['number'][0] + ' ')
+                    continue
 
+            # Include the full data for other days or if current time is past 3 PM
+            if 'center' in day_data and 'number' in day_data['center']:
+                current_week_data.append(day_data['center']['number'])
+
+        if current_week_data and current_week_data not in result:
+            result.append(current_week_data)
+
+
+        context = {
+            'rows': result,
+            'listRed': ["00", "11", "22", "33", "44", "55", "66", "77", "88", "99", "05", "50", "16", "61", "27", "72", "38", "83", "49", "94", "**"],
+            'gname': gname
+        }
+
+        return render(request, 'Jodi.html', context)
 
     except Exception as e:
-        print('errr__:',e)
-        return render(request,'Userinterface.html')
+        print('errr__:', e)
+        return render(request, 'Userinterface.html')
+ 
 
 
 def Milan2Submit(request):
@@ -474,164 +436,118 @@ def Holiday2submit(request):
     
 def displayMilanPanel2Result(request):
     try:
-        g2=db2.child('Gname').child('G2').child('G2').get().val()
-        gname=[g2]
-
         listRed = ["00","11","22","33","44","55","66","77","88","99","05","50","16","61","27","72","38","83","49","94","**"]
+        g1 = db2.child('Gname').child('G2').child('G2').get().val()
+        gname = [g1]
+
+        game_data = db2.child('Game2').get().val()
+        if not game_data:
+            return render(request, 'Userinterface.html')
+
         today = datetime.date.today()
-        d= today.strftime('%y-%m-%d')
-        day=today.strftime("%A")
-        x=db2.child('Game2').get()
-        date=[]
-        slot=[]
-        for a in x.each():
-             y=a.key()
-             date.append(y)
-             s=db2.child('Game2').child(y).get()
-             arr=[]
-             for b in s.each():
-                  
-                  d=b.key()
-                  f=db2.child('Game2').child(y).child(d).get()
-                  l=f.val()
-                  value=l['number']
-                  arr.append(value)
-             slot.append(arr)
-        res=[]
-        for i in range(len(date)):
-            date_obj = dt.strptime(date[i], "%y-%m-%d").date()
-
-            day = date_obj.strftime("%A")
-            curr=''
-            if day=='Monday':
-                days_until_next_sat = 5  # If today is Sunday, move to the next Sunday
-                next_sat = date_obj + datetime.timedelta(days=days_until_next_sat)
-                curr=date[i] +' '+'to'+' '+str(next_sat)
-                res.append(curr)
-            
-            today = datetime.date.today()
-            d = today.strftime('%y-%m-%d')
-            now = datetime.datetime.now()
-            time = now.time()
-            hour = time.hour
-            min= time.minute
-
-            time_min = hour * 60 + min
-
-            if int(d[:2]) > int(date[i][:2]):
-                res.append(slot[i][0])
-                res.append(slot[i][1])
-                res.append(slot[i][2])
-            elif int(d[:2]) == int(date[i][:2]):
-                if int(d[3:5]) > int(date[i][3:5]):
-                    res.append(slot[i][0])
-                    res.append(slot[i][1])
-                    res.append(slot[i][2])
-                elif int(d[3:5]) == int(date[i][3:5]):
-                    if int(d[6:]) > int(date[i][6:]):
-                        res.append(slot[i][0])
-                        res.append(slot[i][1])
-                        res.append(slot[i][2])
-                    elif int(d[6:]) == int(date[i][6:]):
-                        if time_min >= 1230:
-                            res.append(slot[i][0][0])
-                            res.append(" ")
-                            res.append(slot[i][2])
-                        if time_min >= 1350:
-                            res[len(res)-3] = slot[i][0]
-                            res[len(res)-2] = slot[i][1]
-
+        current_week_day = today.weekday()
+        now = datetime.datetime.now()
+        current_time = now.hour * 60 + now.minute  
         
-        result = []
-        current_sublist = []
+        result = []  
+        today_data = [] 
 
-        for item in res:
-            if isinstance(item, str) and ('to' in item):
-                if current_sublist:
-                    result.append(current_sublist)
-                current_sublist = [item]
+        for date_str, slots in sorted(game_data.items()):
+            date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+            start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+            end_of_week = start_of_week + datetime.timedelta(days=5)
+
+            week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+
+            if not any(week_id in sublist for sublist in result):
+                result.append([week_id])
+
+            week_list = next(sublist for sublist in result if week_id in sublist)
+
+            # Check if the current date is today
+            if date_obj == today:
+                if current_time >= 1200:  # after 8pm
+                    today_data = [week_id]
+                    if current_time < 1380:  # after 8pm and before 11pm
+                        numbers = [val['number'] for slot, val in slots.items() if 'number' in val]
+                        print(numbers)
+                        if numbers:
+                            today_data.append(numbers[0][0])
+                            today_data.append("")
+                            today_data.append(numbers[2])
+                    else:  # after 11pm
+                        today_data.extend(val['number'] for slot, val in slots.items() if 'number' in val)
             else:
-                current_sublist.append(item)
+                # Append all numbers from other dates
+                week_list.extend(val['number'] for slot, val in slots.items() if 'number' in val)
 
-        if current_sublist:
-            result.append(current_sublist)
-        
-        return render(request,'Panel2.html',{'rows':result,"listRed":listRed,'gname':gname})
-             
+        # Append today's data if it's available
+        if today_data:
+            if current_week_day == 0:
+                date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+                start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+                end_of_week = start_of_week + datetime.timedelta(days=5)
+
+                week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+                result.append[week_id]
+                result.extend(today_data[1:])
+            else:
+                result[-1].extend(today_data[1:])
+        return render(request, 'Panel2.html', {'rows': result,"listRed":listRed,'gname': gname})
+
     except Exception as e:
-        print('err::-',e)
-        return render(request,'Userinterface.html')
+        print('err::-', e)
+        return render(request, 'Userinterface.html')
 
 
 def displayMilanJodi2result(request):
     try:
-        g2=db2.child('Gname').child('G2').child('G2').get().val()
-        gname=[g2]
+        g1 = db2.child('Gname').child('G2').child('G2').get().val()
+        gname = [g1]
 
-        listRed = ["00","11","22","33","44","55","66","77","88","99","05","50","16","61","27","72","38","83","49","94","**"]
-        date=[]
-        val=[]
-        data=db2.child("Game2").get()
-        for x in data.each():
-            x=x.key()
-            date.append(x)
-            y=db2.child("Game2").child(x).child('center').get()
-            ordered_dict = y.val()
-            value = ordered_dict['number']
-            val.append(value)
-        
-        res=[]
-        for i in range(len(date)):
-            date_obj = dt.strptime(date[i], "%y-%m-%d").date()
+        game_data = db2.child("Game2").get().val()
 
-            day = date_obj.strftime("%A")
-            curr=''
-            if day=='Monday':
-                days_until_next_sat = 5  # If today is Sunday, move to the next Sunday
-                next_sat = date_obj + datetime.timedelta(days=days_until_next_sat)
-                curr=date[i] +' '+'to'+' '+str(next_sat)
-                res.append(curr)
-            
-            today = datetime.date.today()
-            d = today.strftime('%y-%m-%d')
-            now = datetime.datetime.now()
-            time = now.time()
-            hour = time.hour
-            min= time.minute
-
-            time_min = hour * 60 + min
-
-            if int(d[:2]) > int(date[i][:2]):
-                res.append(val[i])
-            elif int(d[:2]) == int(date[i][:2]):
-                if int(d[3:5]) > int(date[i][3:5]):
-                    res.append(val[i])
-                elif int(d[3:5]) == int(date[i][3:5]):
-                    if int(d[6:]) > int(date[i][6:]):
-                       res.append(val[i])
-                    elif int(d[6:]) == int(date[i][6:]):
-                        if time_min >= 1230:
-                            res.append(val[i][0])
-                        if time_min >= 1350:
-                            res[len(res)-1] = val[i]
-        
         result = []
-        current_sublist = []
+        current_week = None
+        current_week_data = []
 
-        for item in res:
-            if isinstance(item, str) and ('to' in item):
-                if current_sublist:
-                    result.append(current_sublist)
-                current_sublist = [item]
-            else:
-                current_sublist.append(item)
+        now = datetime.datetime.now()
+        current_time = now.time()
+        today_date = now.date().strftime('%y-%m-%d')
 
-        if current_sublist:
-            result.append(current_sublist)
+        for date_str, day_data in sorted(game_data.items()):
+            date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+            start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+            end_of_week = start_of_week + datetime.timedelta(days=5)
 
-        return render(request,'Jodi2.html',{'rows':result,"listRed":listRed,'gname':gname})
+            week_range = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+            
+            if current_week != week_range:
+                if current_week_data:
+                    result.append(current_week_data)
+                current_week = week_range
+                current_week_data = [week_range]
+            
+            if date_str == today_date:
+                if current_time < datetime.time(20, 0):
+                    continue
+                elif datetime.time(20, 0) <= current_time < datetime.time(23, 0):
+                    current_week_data.append(day_data['center']['number'][0] + ' ')
+                    continue
 
+            if 'center' in day_data and 'number' in day_data['center']:
+                current_week_data.append(day_data['center']['number'])
+
+        if current_week_data and current_week_data not in result:
+            result.append(current_week_data)
+        context = {
+            'rows': result,
+            'listRed': ["00", "11", "22", "33", "44", "55", "66", "77", "88", "99", "05", "50", "16", "61", "27", "72", "38", "83", "49", "94", "**"],
+            'gname': gname
+        }
+
+        return render(request, 'Jodi2.html', context)
 
     except Exception as e:
-        print('errr__:',e)
-        return render(request,'Userinterface.html')
+        print('errr__:', e)
+        return render(request, 'Userinterface.html')
