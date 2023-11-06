@@ -188,8 +188,10 @@ def displayMilanPanelResult(request):
 
             week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
 
-            if not any(week_id in sublist for sublist in result):
-                result.append([week_id])
+            # Check if the current day is Monday before appending new week_id
+            if today.weekday() == 0:  # 0 is Monday
+                if not any(week_id in sublist for sublist in result):
+                    result.append([week_id])
 
             week_list = next(sublist for sublist in result if week_id in sublist)
 
@@ -212,16 +214,7 @@ def displayMilanPanelResult(request):
 
         # Append today's data if it's available
         if today_data:
-            if current_week_day == 0:
-                date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
-                start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
-                end_of_week = start_of_week + datetime.timedelta(days=6)
-
-                week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
-                result.append[week_id]
-                result.extend(today_data[1:])
-            else:
-                result[-1].extend(today_data[1:])
+            result[-1].extend(today_data[1:])
                     
         return render(request, 'Panel.html', {'rows': result,"listRed": listRed,'gname': gname})
 
@@ -459,8 +452,9 @@ def displayMilanPanel2Result(request):
 
             week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
 
-            if not any(week_id in sublist for sublist in result):
-                result.append([week_id])
+            if today.weekday() == 0:  # 0 is Monday
+                if not any(week_id in sublist for sublist in result):
+                    result.append([week_id])
 
             week_list = next(sublist for sublist in result if week_id in sublist)
 
@@ -483,16 +477,17 @@ def displayMilanPanel2Result(request):
 
         # Append today's data if it's available
         if today_data:
-            if current_week_day == 0:
-                date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
-                start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
-                end_of_week = start_of_week + datetime.timedelta(days=5)
+            # print(today_data)
+            # if current_week_day == 0:
+            #     date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
+            #     start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
+            #     end_of_week = start_of_week + datetime.timedelta(days=5)
 
-                week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
-                result.append[week_id]
-                result.extend(today_data[1:])
-            else:
-                result[-1].extend(today_data[1:])
+            #     week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
+            #     # result.append[week_id]
+            #     result[-1].extend(today_data[1:])
+            # else:
+            result[-1].extend(today_data[1:])
         return render(request, 'Panel2.html', {'rows': result,"listRed":listRed,'gname': gname})
 
     except Exception as e:
