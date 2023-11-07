@@ -452,7 +452,7 @@ def displayMilanPanel2Result(request):
 
             week_id = f"{start_of_week.strftime('%y-%m-%d')} to {end_of_week.strftime('%Y-%m-%d')}"
 
-            if today.weekday() == 0:  # 0 is Monday
+            if date_obj.weekday() == 0:  # 0 is Monday
                 if not any(week_id in sublist for sublist in result):
                     result.append([week_id])
 
