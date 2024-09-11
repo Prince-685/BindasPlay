@@ -105,6 +105,33 @@ header{
     margin-bottom: 2rem;
 }
 
+.other{
+    height: auto;
+    width: 100%;
+    font-size: 2.5rem;
+    border-radius: 1rem;
+    margin: 2rem 0rem;
+    padding: 2rem 2rem;
+    background:#6290f75e;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.other button{
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+    background-color: rgb(15 140 154);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 8px;
+    height: 4rem;
+    font-size: large;
+    letter-spacing: 1px;
+    border: none;
+    width: 16rem;
+
+}
+
 .liveResult{
     width: 100%;
     text-align: center;
