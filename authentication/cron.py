@@ -1,24 +1,30 @@
 import logging
-from django.shortcuts import render
 import datetime
 import random
 import pyrebase
 from random import randrange
-from django.shortcuts import render
-from django.contrib import messages
 
 
+# Config = {
+#   "apiKey": "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
+#   "authDomain": "bindasplay-43d58.firebaseapp.com",
+#   "databaseURL":"https://bindasplay-43d58-default-rtdb.firebaseio.com",
+#   "projectId": "bindasplay-43d58",
+#   "storageBucket": "bindasplay-43d58.appspot.com",
+#   "messagingSenderId": "566594345888",
+#   "appId": "1:566594345888:web:7cb38cbcfeca0d22d622c5",
+#   "measurementId": "G-T3LLGYGPT2"
+# }
 Config = {
-  "apiKey": "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
-  "authDomain": "bindasplay-43d58.firebaseapp.com",
-  "databaseURL":"https://bindasplay-43d58-default-rtdb.firebaseio.com",
-  "projectId": "bindasplay-43d58",
-  "storageBucket": "bindasplay-43d58.appspot.com",
-  "messagingSenderId": "566594345888",
-  "appId": "1:566594345888:web:7cb38cbcfeca0d22d622c5",
-  "measurementId": "G-T3LLGYGPT2"
+  "apiKey": "AIzaSyD9JifUDG0d4ftbvVImU_KNvmGt-TVfs0c",
+  "authDomain": "bindasplay-74375.firebaseapp.com",
+  "databaseURL": "https://bindasplay-74375-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  "projectId": "bindasplay-74375",
+  "storageBucket": "bindasplay-74375.firebasestorage.app",
+  "messagingSenderId": "900137744935",
+  "appId": "1:900137744935:web:adecfadca861752a622c02",
+  "measurementId": "G-01TN8NS470"
 }
-
 Config3 = {
   "apiKey": "AIzaSyDxFBqlyY2_eNGJRNyya4F0lS8vR4ArCrM",
   "authDomain": "milan-71cf2.firebaseapp.com",

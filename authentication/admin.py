@@ -7,15 +7,15 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 import pyrebase
 import requests
 Config = {
-  "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
-  "authDomain": "bindasplay-cb08d.firebaseapp.com",
-  "databaseURL": "https://bindasplay-cb08d-default-rtdb.firebaseio.com",
-  "projectId": "bindasplay-cb08d",
-  "storageBucket": "bindasplay-cb08d.appspot.com",
-  "messagingSenderId": "374562043128",
-  "appId": "1:374562043128:web:b3e70f1c0256afe407b70d",
-  "measurementId": "G-67NLCESH35"
-}
+    "apiKey": "AIzaSyAtIC6ftAQWnNBsFA4GYR2O9UFOPs_xsyQ",
+    "authDomain": "bindasplay2-cf89e.firebaseapp.com",
+    "databaseURL": "https://bindasplay2-cf89e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "projectId": "bindasplay2-cf89e",
+    "storageBucket": "bindasplay2-cf89e.firebasestorage.app",
+    "messagingSenderId": "394811528969",
+    "appId": "1:394811528969:web:6280f4a4a76af90bdfe5d8",
+    "measurementId": "G-6GCS2XMYNN"
+  }
 
 firebase = pyrebase.initialize_app(Config)
 authe = firebase.auth()

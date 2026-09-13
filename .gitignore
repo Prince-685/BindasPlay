@@ -1,0 +1,13 @@
+# Local SQLite demo database
+*.sqlite3
+*.sqlite
+
+# Python bytecode caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Logs and editor metadata
+*.log
+.vscode/

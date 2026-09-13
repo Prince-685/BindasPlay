@@ -20,14 +20,14 @@ from authentication.views import checkUserCredentials
 # }
 
 Config = {
-  "apiKey": "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
-  "authDomain": "bindasplay-43d58.firebaseapp.com",
-  "databaseURL":"https://bindasplay-43d58-default-rtdb.firebaseio.com",
-  "projectId": "bindasplay-43d58",
-  "storageBucket": "bindasplay-43d58.appspot.com",
-  "messagingSenderId": "566594345888",
-  "appId": "1:566594345888:web:7cb38cbcfeca0d22d622c5",
-  "measurementId": "G-T3LLGYGPT2"
+  "apiKey": "AIzaSyD9JifUDG0d4ftbvVImU_KNvmGt-TVfs0c",
+  "authDomain": "bindasplay-74375.firebaseapp.com",
+  "databaseURL": "https://bindasplay-74375-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  "projectId": "bindasplay-74375",
+  "storageBucket": "bindasplay-74375.firebasestorage.app",
+  "messagingSenderId": "900137744935",
+  "appId": "1:900137744935:web:adecfadca861752a622c02",
+  "measurementId": "G-01TN8NS470"
 }
 
 

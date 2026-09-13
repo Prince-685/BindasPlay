@@ -11,26 +11,26 @@ import random
 
 
 Config2 = {
-  "apiKey": "AIzaSyBE8thS3U1OK6ALzc5bPBe1P_KprxYHVKw",
-  "authDomain": "bindasplay-cb08d.firebaseapp.com",
-  "databaseURL": "https://bindasplay-cb08d-default-rtdb.firebaseio.com",
-  "projectId": "bindasplay-cb08d",
-  "storageBucket": "bindasplay-cb08d.appspot.com",
-  "messagingSenderId": "374562043128",
-  "appId": "1:374562043128:web:b3e70f1c0256afe407b70d",
-  "measurementId": "G-67NLCESH35"
+    "apiKey": "AIzaSyAtIC6ftAQWnNBsFA4GYR2O9UFOPs_xsyQ",
+    "authDomain": "bindasplay2-cf89e.firebaseapp.com",
+    "databaseURL": "https://bindasplay2-cf89e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "projectId": "bindasplay2-cf89e",
+    "storageBucket": "bindasplay2-cf89e.firebasestorage.app",
+    "messagingSenderId": "394811528969",
+    "appId": "1:394811528969:web:6280f4a4a76af90bdfe5d8",
+    "measurementId": "G-6GCS2XMYNN"
 }
 
 
 Config = {
-  "apiKey": "AIzaSyBuypl8nEeB0NbRdu3Nt2_6h3gYVPZvcHE",
-  "authDomain": "bindasplay-43d58.firebaseapp.com",
-  "databaseURL":"https://bindasplay-43d58-default-rtdb.firebaseio.com",
-  "projectId": "bindasplay-43d58",
-  "storageBucket": "bindasplay-43d58.appspot.com",
-  "messagingSenderId": "566594345888",
-  "appId": "1:566594345888:web:7cb38cbcfeca0d22d622c5",
-  "measurementId": "G-T3LLGYGPT2"
+  "apiKey": "AIzaSyD9JifUDG0d4ftbvVImU_KNvmGt-TVfs0c",
+  "authDomain": "bindasplay-74375.firebaseapp.com",
+  "databaseURL": "https://bindasplay-74375-default-rtdb.asia-southeast1.firebasedatabase.app/",
+  "projectId": "bindasplay-74375",
+  "storageBucket": "bindasplay-74375.firebasestorage.app",
+  "messagingSenderId": "900137744935",
+  "appId": "1:900137744935:web:adecfadca861752a622c02",
+  "measurementId": "G-01TN8NS470"
 }
 
 Config3 = {

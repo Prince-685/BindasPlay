@@ -71,33 +71,8 @@
                     <tbody>
                         <tr>
                             <td>
-                                <select name="time" class="Select">
-                                    <option value="10:00">10:00am</option>
-                                    <option value="10:30">10:30am</option>
-                                    <option value="11:00">11:00am</option>
-                                    <option value="11:30">11:30am</option>
-                                    <option value="12:00">12:00pm</option>
-                                    <option value="12:30">12:30pm</option>
-                                    <option value="13:00">1:00pm</option>
-                                    <option value="13:30">1:30pm</option>
-                                    <option value="14:00">2:00pm</option>
-                                    <option value="14:30">2:30pm</option>
-                                    <option value="15:00">3:00pm</option>
-                                    <option value="15:30">3:30pm</option>
-                                    <option value="16:00">4:00pm</option>
-                                    <option value="16:30">4:30pm</option>
-                                    <option value="17:00">5:00pm</option>
-                                    <option value="17:30">5:30pm</option>
-                                    <option value="18:00">6:00pm</option>
-                                    <option value="18:30">6:30pm</option>
-                                    <option value="19:00">7:00pm</option>
-                                    <option value="19:30">7:30pm</option>
-                                    <option value="20:00">8:00pm</option>
-                                    <option value="20:30">8:30pm</option>
-                                    <option value="21:00">9:00pm</option>
-                                    <option value="21:30">9:30pm</option>
-                                    <option value="22:00">10:00pm</option>
-                                    
+                                <select id="timeSelect" name="time" class="Select">
+                                    <option value="">Loading time slots...</option>
                                 </select>
                             </td>
                             <td>
@@ -135,6 +110,75 @@
         
     </div>
 <script>
+    const timeSlots = [
+        { value: '10:00', label: '10:00am' },
+        { value: '10:30', label: '10:30am' },
+        { value: '11:00', label: '11:00am' },
+        { value: '11:30', label: '11:30am' },
+        { value: '12:00', label: '12:00pm' },
+        { value: '12:30', label: '12:30pm' },
+        { value: '13:00', label: '1:00pm' },
+        { value: '13:30', label: '1:30pm' },
+        { value: '14:00', label: '2:00pm' },
+        { value: '14:30', label: '2:30pm' },
+        { value: '15:00', label: '3:00pm' },
+        { value: '15:30', label: '3:30pm' },
+        { value: '16:00', label: '4:00pm' },
+        { value: '16:30', label: '4:30pm' },
+        { value: '17:00', label: '5:00pm' },
+        { value: '17:30', label: '5:30pm' },
+        { value: '18:00', label: '6:00pm' },
+        { value: '18:30', label: '6:30pm' },
+        { value: '19:00', label: '7:00pm' },
+        { value: '19:30', label: '7:30pm' },
+        { value: '20:00', label: '8:00pm' },
+        { value: '20:30', label: '8:30pm' },
+        { value: '21:00', label: '9:00pm' },
+        { value: '21:30', label: '9:30pm' },
+        { value: '22:00', label: '10:00pm' }
+    ];
+
+    function toMinutes(timeValue) {
+        const [hours, minutes] = timeValue.split(':').map(Number);
+        return hours * 60 + minutes;
+    }
+
+    function renderTimeSlots() {
+        const select = document.getElementById('timeSelect');
+        if (!select) return;
+
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        const futureSlots = timeSlots.filter(slot => {
+            const slotMinutes = toMinutes(slot.value);
+            const diffMinutes = slotMinutes - currentMinutes;
+            return diffMinutes > 1;
+        });
+
+        select.innerHTML = '';
+
+        if (futureSlots.length === 0) {
+            const option = document.createElement('option');
+            option.value = '';
+            option.textContent = 'No future slots available';
+            select.appendChild(option);
+            select.disabled = true;
+            return;
+        }
+
+        select.disabled = false;
+
+        futureSlots.forEach(slot => {
+            const option = document.createElement('option');
+            option.value = slot.value;
+            option.textContent = slot.label;
+            select.appendChild(option);
+        });
+    }
+
+    renderTimeSlots();
+
     let btn1 = document.querySelector('#btn1');
     let btn2 = document.querySelector('#btn2');
     let btn3 = document.querySelector('#btn3');
