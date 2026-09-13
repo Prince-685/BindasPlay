@@ -1,0 +1,259 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #d4d9e7;
+}
+
+html{
+    font-size: 10px;
+}
+
+.container{
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+}
+
+.header{
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+    font-size: 7rem;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 3px solid #4ab6ca;
+    -moz-box-shadow: 10px 10px 5px #5b929d;
+    -webkit-box-shadow: 10px 10px 5px #5b929d;
+    box-shadow: 10px 10px 5px #5b929d;
+    
+}
+
+.header a{
+    color: #0789a0;
+    text-decoration: none;
+}
+
+.chartHeader{
+    margin-top: 2rem;
+    background-color: #b9edb9;
+    text-align: center;
+    width: 100%;
+    padding: 2rem;
+    font-size: 3.5rem;
+    font-weight: 400;
+    border: 2px solid #fff;
+}
+
+.table-header{
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+    border: 2px solid #fff;
+    background-color: #b9edb9;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.chart-table{
+    width: 100%;
+    margin-top: 0.5rem;
+    text-align: center;
+    border-spacing: 0px;
+    border-bottom: 1px solid #fff;
+    font-size: 1.8rem;
+}
+
+.dateHead{
+    width: 15%;
+}
+
+.chart-table thead tr th{
+    background-color: #b9edb9;
+    border: 1px solid #fff;
+}
+
+.chart-table tbody tr .date{
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    font-weight: 400;
+    font-size: 2rem;
+}
+
+.chart-table tbody tr .left{
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    padding-left: 1px;
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+
+.chart-table tbody tr .center{
+    border-top: 1px solid #fff;
+    padding-left: 2px;
+    padding-right: 2px;
+    font-weight: 900;
+    font-size: 3rem;
+}
+
+.chart-table tbody tr .right{
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    padding-right: 1px;
+    font-weight: 600;
+    font-size: 2.5rem;
+}
+
+.bottom-button,.top-button{
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.bottom-button button, .top-button button{
+    padding: 1rem;
+    text-align: center;
+    color: #222;
+    cursor: pointer;
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    text-align: center;
+    background-color: #b9edb9;
+    border: 2px solid #fff;
+    font-weight: 600;
+}
+
+.refresh-button{
+    width: 100%;
+    text-align: center;
+    border: 2px solid #fff;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.refresh-button h3{
+    margin-top: 1rem;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0a366e;
+}
+
+.refresh-button button{
+    padding: 1rem;
+    text-align: center;
+    background-color: rgb(15, 77, 154);
+    border: 2px solid rgb(152, 208, 243);
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.8rem;
+    margin-top: 1rem;
+}
+
+.red{
+    color: red;
+}
+
+.black{
+    color: #222;
+}
+
+@media (max-width:925px){
+    .chart-table tbody tr .left,.chart-table tbody tr .date,.chart-table tbody tr .right{
+        font-size: 2rem;
+    }
+
+    .chart-table tbody tr .center{
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width:685px){
+    .chart-table tbody tr .left,.chart-table tbody tr .date,.chart-table tbody tr .right{
+        font-size: 1.5rem;
+    }
+
+    .chart-table tbody tr .center{
+        font-size: 2rem;
+    }
+
+    .chartHeader{
+        font-size: 3rem;
+    }
+}
+
+@media (max-width:560px){
+    .container{
+        padding: 0.5rem 2px;
+    }
+    .header{
+        font-size: 5rem;
+    }
+    .chart-table tbody tr .left,.chart-table tbody tr .date,.chart-table tbody tr .right{
+        font-size: 1.5rem;
+    }
+
+    .chart-table tbody tr .center{
+        font-size: 2rem;
+    }
+
+    .chartHeader{
+        font-size: 2.5rem;
+    }
+}
+
+
+@media (max-width:480px){
+    .container{
+        padding: 0.5rem 2px;
+    }
+    .header{
+        font-size: 4rem;
+    }
+    .chart-table tbody tr .left,.chart-table tbody tr .date,.chart-table tbody tr .right{
+        font-size: 1.2rem;
+    }
+
+    .chart-table tbody tr .center{
+        font-size: 1.5rem;
+    }
+
+    .chartHeader{
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width:380px){
+    .container{
+        padding: 0.5rem 2px;
+    }
+
+    .header{
+        border-radius: 5px;
+    }
+
+    .chart-table tbody tr .date{
+        font-size: 9px;
+    }
+
+    .chart-table tbody tr .left{
+        font-size: 12px;
+    }
+    .chart-table tbody tr .right{
+        font-size: 12px;
+    }
+
+    .chart-table tbody tr .center{
+        font-size: 1.5rem;
+    }
+    
+    .refresh-button button{
+        font-size: 1.5rem;
+    }
+}

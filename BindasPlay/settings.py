@@ -370,14 +370,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ============================================================
 
 CRONJOBS = [
-    (
-        "00 01 * * *",
-        "authentication.cron.AutoSubmitMilanGame1Data",
-    ),
-    (
-        "02 01 * * *",
-        "authentication.cron.AutoSubmitMilanGame2Data",
-    ),
+    #(
+    #    "00 01 * * *",
+    #    "authentication.cron.AutoSubmitMilanGame1Data",
+    #),
+    #(
+    #    "02 01 * * *",
+    #    "authentication.cron.AutoSubmitMilanGame2Data",
+    #),
     (
         "04 01 * * *",
         "authentication.cron.BindasAutomatic",

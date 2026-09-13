@@ -1,0 +1,241 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(223, 218, 218);
+}
+
+html{
+    font-size: 10px;
+}
+
+.container{
+    padding: 3rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.header{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #17d7da;
+    border: 3px solid rgb(142 177 190);
+    border-radius: 10px;
+    padding: 1.8rem;
+}
+
+.header header{
+    width: 80%;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.header header a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.header .admin a{
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: #fff;
+    background-color: #0a3211;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.content{
+    width: 90%;
+    margin-top: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 5rem;
+    border-radius: 10px;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+form .form-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form .form-content .previous{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.gameName, .date{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gameName label, .date label{
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.gameName select{
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid #222;
+}
+
+
+.date input{
+    font-size: 2rem;
+    height: 3.5rem;
+    border-radius: 5px;
+    padding: 0px 10px;
+    width: 100%;
+}
+
+input:focus{
+    outline: none;
+}
+
+.data{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.data div:first-child{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.data .firstNum, .data .secondNum, .data .thirdNum{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.data div:first-child label,.data .firstNum label, .data .secondNum label, .data .thirdNum label{
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.data div:first-child select,.data .firstNum input, .data .secondNum input, .data .thirdNum input{
+    width: 100%;
+    height: 3.5rem;
+    font-size: 1.8rem;
+    padding: 3px;
+}
+
+.button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3.5rem;
+}
+
+.button button{
+    width: 20rem;
+    padding: 1rem 1.5rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+    background-color: #17d7da;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+@media (max-width:1020px){
+    .content{
+        width: 90%;
+        padding: 3rem 1rem;
+    }
+
+    .header header{
+        width: 100%;
+    }
+}
+
+@media (max-width:760px){
+    .content{
+        width: 100%;
+    }
+
+    .header header{
+        width: 100%;
+    }
+
+    .data div:first-child select,.data .firstNum input, .data .secondNum input, .data .thirdNum input{
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width:635px){
+    .content{
+        width: 100%;
+    }
+
+    .header header{
+        width: 100%;
+    }
+
+    .data{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .data div:first-child select,.data .firstNum input, .data .secondNum input, .data .thirdNum input{
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width:445px){
+    .container{
+        padding: 1rem;
+    }
+
+    .header header{
+        font-size: 3rem;
+    }
+    .previous{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
