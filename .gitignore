@@ -11,3 +11,4 @@ __pycache__/
 # Logs and editor metadata
 *.log
 .vscode/
+venv/
