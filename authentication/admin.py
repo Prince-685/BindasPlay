@@ -67,7 +67,7 @@ def adminLogin(request):
       return render(request, "adminLogin.html",{'msg':'Wrong Username/Password'})
         
   except Exception as e:
-    print('errr--',e)
+    # print('errr--',e)
     return render(request, "adminLogin.html")
   
 
@@ -122,7 +122,7 @@ def updateAdminPass(request):
           return render(request,"updateAdminPass.html",{'msg':'Please enter correct currentPassowrd'})
       
    except Exception as e:
-      print('er00 : ',e)
+      # print('er00 : ',e)
       return render(request,'updateAdminPass.html')
 
 def updatePassword(request):
@@ -192,7 +192,7 @@ def updatePassword(request):
         return render(request, "usersData.html", {'msg': 'User deleted successfully', "rows": rows})
       
     except Exception as e:
-      print('Error:', e)
+      # print('Error:', e)
       return render(request, "usersData.html")
 
 def AddUserPage(request):
@@ -216,7 +216,7 @@ def AddUser(request):
       
       return render(request, "AddUser.html",{'msg': 'User Added successfully'})
    except Exception as e:
-      print("user error:",e)
+      # print("user error:",e)
       return render(request, "AddUser.html",{'msg': 'User Not Added'})
 
 

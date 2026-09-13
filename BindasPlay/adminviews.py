@@ -61,7 +61,7 @@ db2=firebase2.database()
 def ATypeSubmit1(request):
     try:
 
-        # print(username)
+        # ###print(username)
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -122,7 +122,7 @@ def ATypeSubmit1(request):
         return render(request,"adminbindas.html")
         # return render(request,"dasboard.html",{"btn1":b1,"btn2":btn2,"btn3":btn3})
     except Exception as e:
-        print("errrr:",e)
+        # ###print("errrr:",e)
         return render(request,"adminbindas.html")
 
 
@@ -189,7 +189,7 @@ def ATypeSubmit2(request):
         return render(request,"adminbindas.html")
         # return render(request,"dasboard.html",{"btn1":btn1,"btn2":b2,"btn3":btn3})
     except Exception as e:
-        print("errrr:",e)
+        # #print("errrr:",e)
         return render(request,"adminbindas.html")
 
 def ATypeSubmit3(request):
@@ -256,7 +256,7 @@ def ATypeSubmit3(request):
         return render(request,"adminbindas.html")
         # return render(request,"dasboard.html",{"btn1":btn1,"btn2":btn2,"btn3":b3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"adminbindas.html")
 
 def ATypeSubmitKalyan1(request):
@@ -323,7 +323,7 @@ def ATypeSubmitKalyan1(request):
         return render(request,"adminkalyan.html")
         # return render(request,"kalyandasboard.html",{"b1":btn1,"b2":bt2,"b3":bt3})
     except Exception as e:
-        print("errrr:",e)
+        ####print("errrr:",e)
         return render(request,"adminkalyan.html")
 
 
@@ -391,7 +391,7 @@ def ATypeSubmitKalyan2(request):
         return render(request,"adminkalyan.html")
         # return render(request,"kalyandasboard.html",{"b1":bt1,"b2":btn2,"b3":bt3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"adminkalyan.html")
 
 
@@ -459,7 +459,7 @@ def ATypeSubmitKalyan3(request):
         return render(request,"adminkalyan.html")
         # return render(request,"kalyandasboard.html",{"b1":bt1,"b2":bt2,"b3":btn3})
     except Exception as e:
-        print("errrr:",e)
+        ###print("errrr:",e)
         return render(request,"adminkalyan.html")
 
 def AsaveResult(request):
@@ -525,7 +525,7 @@ def AsaveResult(request):
         
         return render(request,"adminbindas.html",{'status':True})
     except Exception as e:
-       print("errrrrrrrrr",e)
+       ###print("errrrrrrrrr",e)
        return render(request,"adminbindas.html", {'status': False})
 
 def AsaveResultKalyan(request):
@@ -578,7 +578,7 @@ def AsaveResultKalyan(request):
         
         return render(request,"adminkalyan.html",{'status':True})
     except Exception as e:
-       print("errrrrrrrrr",e)
+       ###print("errrrrrrrrr",e)
        return render(request,"adminkalyan.html", {'status': False})
 
 def AMilanSubmit(request):
@@ -619,7 +619,7 @@ def AMilanSubmit(request):
         return render(request,"PanelDashboard.html",{'status':True})
 
     except Exception as e:
-        print("errr:::",e)
+        ###print("errr:::",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"PanelDashboard.html", {'status': False})
     
@@ -671,7 +671,7 @@ def AautoMilanSubmit(request):
         return render(request,"PanelDashboard.html")
     
     except Exception as e:
-        print("error:",e)
+        ###print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"PanelDashboard.html")
 
@@ -689,7 +689,7 @@ def Aholidaysubmit(request):
         messages.success(request, 'Today is Holiday Successfully Set')
         return render(request,"PanelDashboard.html")
     except Exception as e:
-        print("error:",e)
+        ###print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"PanelDashboard.html")
 
@@ -732,7 +732,7 @@ def AMilan2Submit(request):
         return render(request,"PanelDashboard2.html",{'status':True})
 
     except Exception as e:
-        print("errr:::",e)
+        ###print("errr:::",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"PanelDashboard2.html", {'status': False})
 
@@ -789,7 +789,7 @@ def AautoMilan2Submit(request):
         return render(request,"PanelDashboard2.html")
     
     except Exception as e:
-        print("error:",e)
+        ###print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"PanelDashboard2.html")
 
@@ -807,7 +807,7 @@ def Aholiday2submit(request):
         messages.success(request, 'Today is Holiday Successfully Set')
         return render(request,"PanelDashboard2.html")
     except Exception as e:
-        print("error:",e)
+        ###print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"PanelDashboard2.html")
 
@@ -821,7 +821,7 @@ def Gname(request):
         messages.success(request, 'Game Name Successfully Set')
         return render(request,'PanelDashboard.html')
     except Exception as e:
-        print('eeeeeee::',e)
+        ###print('eeeeeee::',e)
         messages.error(request, 'An error occurred Game Name is not Saved')
         return render(request,'PanelDashboard.html')
 
@@ -834,7 +834,7 @@ def G2name(request):
         messages.success(request, 'Game Name Successfully Set')
         return render(request,'PanelDashboard2.html')
     except Exception as e:
-        print('eeeeeee::',e)
+        ###print('eeeeeee::',e)
         messages.error(request, 'An error occurred Game Name is not Saved')
         return render(request,'PanelDashboard2.html')
 
@@ -876,7 +876,7 @@ def AddPreviousdata(request):
         return render(request,'PreviousDate.html')
 
     except Exception as e:
-        print('error: ',e)
+        ###print('error: ',e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,'PreviousDate.html')
 

@@ -127,7 +127,7 @@ def Userview(request):
 
         return render(request,"Userinterface.html",{"row":row,'result1':result1,'result2':result2})
     except Exception as e:
-        print("error:",e)
+        #print("error:",e)
         return render(request,"Userinterface.html")
 
 
@@ -261,7 +261,7 @@ def displayResult(request):
 
         return render(request,"displayresult.html",{"rows":res}) 
     except Exception as e:
-        print('err:  ',e)
+        #print('err:  ',e)
         return render(request,"displayresult.html")
 
 
@@ -334,7 +334,7 @@ def saveResult(request):
         
         return render(request,"dasboard.html",{'status':True})
     except Exception as e:
-       print("errrrrrrrrr",e)
+       #print("errrrrrrrrr",e)
        return render(request,"dasboard.html", {'status': False})
 
 
@@ -607,7 +607,7 @@ def SearchByDate(request):
         
         return render(request,"resultbydate.html",{'rows':res}) 
     except Exception as e:
-        print('errooooor:',e)
+        #print('errooooor:',e)
         return render(request,'resultbydate.html')
 
 
@@ -696,7 +696,7 @@ def SearchAll(request):
 
         return render(request,"editresult.html",{'rows':res}) 
     except Exception as e:
-        print('erreeee:  ',e)
+        #print('erreeee:  ',e)
         return render(request,'editresult.html')
 
 
@@ -720,5 +720,4 @@ def AddNotification(request):
         
         return render(request,"Notifications.html",{'status':True})
     except Exception as e:
-       print("errrrrrrrrr",e)
        return render(request,"Notifications.html", {'status': False})

@@ -48,8 +48,8 @@ def TypeSubmit1(request):
     try:
         username = request.session.get('current_username')
         passw = request.session.get('current_password')
-        print(username,passw)
-        # print(username)
+        #print(username,passw)
+        # #print(username)
         # data1 = db.child('btn1').child('b1').get()
         # btn1=data1.val()
         # data2 = db.child('btn2').child('b2').get()
@@ -84,7 +84,7 @@ def TypeSubmit1(request):
 
         
         user = checkUserCredentials(username,passw)
-        print("8888 : " ,user)
+        #print("8888 : " ,user)
         if user==False:
             messages.error(request, 'Username or password is incorrect. Please login again.')
             # If authentication fails, return an error response
@@ -117,7 +117,7 @@ def TypeSubmit1(request):
         return render(request,"dasboard.html")
         # return render(request,"dasboard.html",{"btn1":b1,"btn2":btn2,"btn3":btn3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"dasboard.html")
 
 
@@ -190,7 +190,7 @@ def TypeSubmit2(request):
         return render(request,"dasboard.html")
         # return render(request,"dasboard.html",{"btn1":btn1,"btn2":b2,"btn3":btn3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"dasboard.html")
 
 def TypeSubmit3(request):
@@ -263,14 +263,14 @@ def TypeSubmit3(request):
         return render(request,"dasboard.html")
         # return render(request,"dasboard.html",{"btn1":btn1,"btn2":btn2,"btn3":b3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"dasboard.html")
 
 def TypeSubmitKalyan1(request):
     try:
         username = request.session.get('current_username')
         passw = request.session.get('current_password')
-        print(username,passw)
+        #print(username,passw)
         # da1 = db.child('kBtn1').child('b1').get()
         # bt1=da1.val()
         # da2 = db.child('kBtn2').child('b2').get()
@@ -339,7 +339,7 @@ def TypeSubmitKalyan1(request):
         return render(request,"kalyandasboard.html")
         # return render(request,"kalyandasboard.html",{"b1":btn1,"b2":bt2,"b3":bt3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"kalyandasboard.html")
 
 
@@ -415,7 +415,7 @@ def TypeSubmitKalyan2(request):
         return render(request,"kalyandasboard.html")
         # return render(request,"kalyandasboard.html",{"b1":bt1,"b2":btn2,"b3":bt3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"kalyandasboard.html")
 
 
@@ -490,7 +490,7 @@ def TypeSubmitKalyan3(request):
         return render(request,"kalyandasboard.html")
         # return render(request,"kalyandasboard.html",{"b1":bt1,"b2":bt2,"b3":btn3})
     except Exception as e:
-        print("errrr:",e)
+        #print("errrr:",e)
         return render(request,"kalyandasboard.html")
 
 

@@ -68,7 +68,7 @@ def MilanSubmit(request):
         messages.success(request, 'Data is Saved Successfully')
         return render(request,"Userpaneldashboard.html",{'status':True})
     except Exception as e:
-        print("errr:::",e)
+        #print("errr:::",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"Userpaneldasboard.html", {'status': False})
 
@@ -130,7 +130,7 @@ def AutoMilanSubmit(request):
         messages.success(request, 'Data is Saved Successfully')
         return render(request,"Userpaneldashboard.html")
     except Exception as e:
-        print("error:",e)
+        #print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"Userpaneldashboard.html")
 
@@ -158,7 +158,7 @@ def Holidaysubmit(request):
         messages.success(request, 'Today is Holiday Successfully Set')
         return render(request,"Userpaneldashboard.html")
     except Exception as e:
-        print("error:",e)
+        #print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"Userpaneldashboard.html")
     
@@ -201,7 +201,7 @@ def displayMilanPanelResult(request):
                     today_data = [week_id]
                     if current_time < 900:  # after 1pm and before 3pm
                         numbers = [val['number'] for slot, val in slots.items() if 'number' in val]
-                        print(numbers)
+                        #print(numbers)
                         if numbers:
                             today_data.append(numbers[0][0])
                             today_data.append("")
@@ -219,7 +219,7 @@ def displayMilanPanelResult(request):
         return render(request, 'Panel.html', {'rows': result,"listRed": listRed,'gname': gname})
 
     except Exception as e:
-        print('err::-', e)
+        #print('err::-', e)
         return render(request, 'Userinterface.html')
 
 
@@ -278,7 +278,7 @@ def displayMilanJodiresult(request):
         return render(request, 'Jodi.html', context)
 
     except Exception as e:
-        print('errr__:', e)
+        #print('errr__:', e)
         return render(request, 'Userinterface.html')
  
 
@@ -330,7 +330,7 @@ def Milan2Submit(request):
         return render(request,"Userpanel2dashboard.html",{'status':True})
 
     except Exception as e:
-        print("errr:::",e)
+        #print("errr:::",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"Userpanel2dashboard.html", {'status': False})
 
@@ -396,7 +396,7 @@ def AutoMilan2Submit(request):
         messages.success(request, 'Data is Saved Successfully')
         return render(request,"Userpanel2dashboard.html")
     except Exception as e:
-        print("error:",e)
+        #print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"Userpanel2dashboard.html")
 
@@ -423,7 +423,7 @@ def Holiday2submit(request):
         messages.success(request, 'Today is Holiday Successfully Set')
         return render(request,"Userpanel2dashboard.html")
     except Exception as e:
-        print("error:",e)
+        #print("error:",e)
         messages.error(request, 'An error occurred Data is not Saved')
         return render(request,"Userpanel2dashboard.html")
     
@@ -464,7 +464,7 @@ def displayMilanPanel2Result(request):
                     today_data = [week_id]
                     if current_time < 1380:  # after 8pm and before 11pm
                         numbers = [val['number'] for slot, val in slots.items() if 'number' in val]
-                        print(numbers)
+                        #print(numbers)
                         if numbers:
                             today_data.append(numbers[0][0])
                             today_data.append("")
@@ -477,7 +477,7 @@ def displayMilanPanel2Result(request):
 
         # Append today's data if it's available
         if today_data:
-            # print(today_data)
+            # #print(today_data)
             # if current_week_day == 0:
             #     date_obj = datetime.datetime.strptime(date_str, "%y-%m-%d").date()
             #     start_of_week = date_obj - datetime.timedelta(days=date_obj.weekday())
@@ -491,7 +491,7 @@ def displayMilanPanel2Result(request):
         return render(request, 'Panel2.html', {'rows': result,"listRed":listRed,'gname': gname})
 
     except Exception as e:
-        print('err::-', e)
+        #print('err::-', e)
         return render(request, 'Userinterface.html')
 
 
@@ -544,5 +544,5 @@ def displayMilanJodi2result(request):
         return render(request, 'Jodi2.html', context)
 
     except Exception as e:
-        print('errr__:', e)
+        #print('errr__:', e)
         return render(request, 'Userinterface.html')

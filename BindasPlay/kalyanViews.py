@@ -163,7 +163,7 @@ def displayResultKalyan(request):
                 res.append(row)
         return render(request,"kalyandisplayresult.html",{"rows":res}) 
     except Exception as e:
-        print('err:  ',e)
+        #print('err:  ',e)
         return render(request,"kalyandisplayresult.html")
 
 
@@ -172,7 +172,7 @@ def saveResultKalyan(request):
     try:
         username = request.session.get('current_username')
         passw = request.session.get('current_password')
-        print(username,passw)
+        #print(username,passw)
         today = datetime.date.today()
         d= today.strftime("%y/%m/%d")
         
@@ -223,7 +223,7 @@ def saveResultKalyan(request):
         
         return render(request,"kalyandasboard.html",{'status':True})
     except Exception as e:
-       print("errrrrrrrrr",e)
+       #print("errrrrrrrrr",e)
        return render(request,"kalyandasboard.html", {'status': False})
 
 
@@ -500,7 +500,7 @@ def SearchByDateKalyan(request):
 
         return render(request,"kalyanResultByDate.html",{'rows':res}) 
     except Exception as e:
-        print('errooooor:',e)
+        #print('errooooor:',e)
         return render(request,'kalyanResultByDate.html')
 
 def SearchAllKalyan(request):
@@ -588,6 +588,6 @@ def SearchAllKalyan(request):
 
         return render(request,"editresultKalyan.html",{'rows':res}) 
     except Exception as e:
-        print('erreeee:  ',e)
+        #print('erreeee:  ',e)
         return render(request,'editresultKalyan.html')
 

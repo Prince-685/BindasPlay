@@ -128,7 +128,7 @@ def userLogin(request):
     else:
       return render(request, "Userinterface.html",{'msg':'Wrong Username/Password'})
   except Exception as e:
-    print('errr--',e)
+    # print('errr--',e)
     return render(request, "Userinterface.html")
         
   

@@ -47,7 +47,7 @@ def userData(request):
     gname=[g1,g2]
     for x in uData.each():
         info = []
-        print(x.key())
+        #print(x.key())
         info.append(x.key())
         info.append(x.val())
         rows.append(info)
