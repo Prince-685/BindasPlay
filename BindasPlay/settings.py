@@ -196,9 +196,9 @@ SECRET_KEY = 'django-insecure-#z$#+%496%n!(z=xnn0z%#2h)-mf#zwcsa3_3t&p)pef2lr#&v
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "13.233.137.23"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "13.233.137.23", "bindasplaywin.com", "www.bindasplaywin.com"]
 
-CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1','https://*.127.0.0.1',"http://13.233.137.23" ]
+CSRF_TRUSTED_ORIGINS = ['http://*.127.0.0.1','https://*.127.0.0.1',"http://13.233.137.23", "https://bindasplaywin.com", "https://www.bindasplaywin.com" ]
 
 
 # ============================================================
