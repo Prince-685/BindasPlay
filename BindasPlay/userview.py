@@ -124,7 +124,6 @@ def Userview(request):
         row.append(g1)
         row.append(g2)
         
-
         return render(request,"Userinterface.html",{"row":row,'result1':result1,'result2':result2})
     except Exception as e:
         #print("error:",e)
